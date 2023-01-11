@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="0e881e37-9525-44be-92af-89bc3adcbd2f" name="KRAKEN" url="http://kraken.msu.montana.edu">
+        <fileTransfer host="kraken.msu.montana.edu" port="22" rootFolder="/home/gmoral" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

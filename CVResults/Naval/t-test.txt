@@ -1,0 +1,12 @@
+MPIW
+AQD vs QD+: t-value = -6.050251. p-value = 0.00019042805740951987)
+AQD vs QD: t-value = -54.748283. p-value = 1.1381763802387839e-12)
+AQD vs MC-Dropout-PI: t-value = -0.785812. p-value = 0.45216914041357215)
+PICP
+AQD vs QD+: t-value = -12.937305. p-value = 4.047510141674655e-07)
+AQD vs QD: t-value = -22.742970. p-value = 2.91470542770613e-09)
+AQD vs MC-Dropout-PI: t-value = -16.732937. p-value = 4.3500937851863586e-08)
+MSE
+AQD vs QD+: t-value = -5.070735. p-value = 0.000671202092523994)
+AQD vs QD: t-value = -32.619681. p-value = 1.176489993121185e-10)
+AQD vs MC-Dropout-PI: t-value = 2.517483. p-value = 0.03290423938862974)

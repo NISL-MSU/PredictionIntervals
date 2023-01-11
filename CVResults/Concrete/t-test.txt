@@ -1,0 +1,48 @@
+MPIW
+DualAQD vs QD+: t-value = -4.055254. p-value = 0.0028622591575628692)
+DualAQD vs QD: t-value = -20.993896. p-value = 5.917175199619248e-09)
+DualAQD vs MC-Dropout-PI: t-value = -8.180660. p-value = 1.850980234097431e-05)
+PICP
+DualAQD vs QD+: t-value = -2.121322. p-value = 0.06290237489334177)
+DualAQD vs QD: t-value = -7.829343. p-value = 2.6285274787210374e-05)
+DualAQD vs MC-Dropout-PI: t-value = 0.991553. p-value = 0.3417416177294981414)
+MSE
+DualAQD vs QD+: t-value = -3.112950. p-value = 0.012459439912513873)
+DualAQD vs QD: t-value = -7.703512. p-value = 2.9891728153325954e-05)
+DualAQD vs MC-Dropout-PI: t-value = -1.157252. p-value = 0.2769595930460797)
+MPIW
+DualAQD vs QD+: t-value = -4.932168. p-value = 0.0008109197181903382)
+DualAQD vs QD: t-value = -20.505875. p-value = 7.28341251007821e-09)
+DualAQD vs MC-Dropout-PI: t-value = -10.864749. p-value = 1.7868282124955514e-06)
+PICP
+DualAQD vs QD+: t-value = 0.000000. p-value = 1.0)
+DualAQD vs QD: t-value = -5.013778. p-value = 0.0007252115306612845)
+DualAQD vs MC-Dropout-PI: t-value = -1.245684. p-value = 0.2443326634428257)
+MSE
+DualAQD vs QD+: t-value = -3.112950. p-value = 0.012459439912513873)
+DualAQD vs QD: t-value = -7.703512. p-value = 2.9891728153325954e-05)
+DualAQD vs MC-Dropout-PI: t-value = -1.157252. p-value = 0.2769595930460797)
+MPIW
+DualAQD vs QD+: t-value = -4.932168. p-value = 0.0008109197181903382)
+DualAQD vs QD: t-value = -20.505875. p-value = 7.28341251007821e-09)
+DualAQD vs MC-Dropout-PI: t-value = -10.864749. p-value = 1.7868282124955514e-06)
+PICP
+DualAQD vs QD+: t-value = 0.000000. p-value = 1.0)
+DualAQD vs QD: t-value = -5.013778. p-value = 0.0007252115306612845)
+DualAQD vs MC-Dropout-PI: t-value = -1.245684. p-value = 0.2443326634428257)
+MSE
+DualAQD vs QD+: t-value = -3.112950. p-value = 0.012459439912513873)
+DualAQD vs QD: t-value = -7.703512. p-value = 2.9891728153325954e-05)
+DualAQD vs MC-Dropout-PI: t-value = -1.157252. p-value = 0.2769595930460797)
+MPIW
+DualAQD vs QD+: t-value = -4.932168. p-value = 0.0008109197181903382)
+DualAQD vs QD: t-value = -20.505875. p-value = 7.28341251007821e-09)
+DualAQD vs MC-Dropout-PI: t-value = -10.864749. p-value = 1.7868282124955514e-06)
+PICP
+DualAQD vs QD+: t-value = 0.000000. p-value = 1.0)
+DualAQD vs QD: t-value = -5.013778. p-value = 0.0007252115306612845)
+DualAQD vs MC-Dropout-PI: t-value = -1.245684. p-value = 0.2443326634428257)
+MSE
+DualAQD vs QD+: t-value = -3.112950. p-value = 0.012459439912513873)
+DualAQD vs QD: t-value = -7.703512. p-value = 2.9891728153325954e-05)
+DualAQD vs MC-Dropout-PI: t-value = -1.157252. p-value = 0.2769595930460797)

@@ -1,0 +1,4 @@
+Params: 0.024
+Overall MSE 0.009 (+/- 0.000)
+Overall PICP 0.985 (+/- 0.003)
+Overall MPIW 0.502 (+/- 0.008)

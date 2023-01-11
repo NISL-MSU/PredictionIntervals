@@ -1,0 +1,16 @@
+Lambda_1 0.400% - Lambda_2 0.300%: MSE 0.013%, PICP 0.882%, MPIW 0.344%
+Lambda_1 0.400% - Lambda_2 0.400%: MSE 0.010%, PICP 0.952%, MPIW 0.371%
+Lambda_1 0.400% - Lambda_2 0.500%: MSE 0.007%, PICP 0.954%, MPIW 0.336%
+Lambda_1 0.400% - Lambda_2 0.600%: MSE 0.007%, PICP 0.973%, MPIW 0.366%
+Lambda_1 0.500% - Lambda_2 0.300%: MSE 0.012%, PICP 0.927%, MPIW 0.375%
+Lambda_1 0.500% - Lambda_2 0.400%: MSE 0.007%, PICP 0.955%, MPIW 0.328%
+Lambda_1 0.500% - Lambda_2 0.500%: MSE 0.007%, PICP 0.972%, MPIW 0.365%
+Lambda_1 0.500% - Lambda_2 0.600%: MSE 0.007%, PICP 0.987%, MPIW 0.415%
+Lambda_1 0.600% - Lambda_2 0.300%: MSE 0.007%, PICP 0.956%, MPIW 0.331%
+Lambda_1 0.600% - Lambda_2 0.400%: MSE 0.007%, PICP 0.974%, MPIW 0.364%
+Lambda_1 0.600% - Lambda_2 0.500%: MSE 0.007%, PICP 0.988%, MPIW 0.420%
+Lambda_1 0.600% - Lambda_2 0.600%: MSE 0.007%, PICP 0.993%, MPIW 0.468%
+Lambda_1 0.700% - Lambda_2 0.300%: MSE 0.007%, PICP 0.968%, MPIW 0.355%
+Lambda_1 0.700% - Lambda_2 0.400%: MSE 0.007%, PICP 0.991%, MPIW 0.434%
+Lambda_1 0.700% - Lambda_2 0.500%: MSE 0.007%, PICP 0.995%, MPIW 0.491%
+Lambda_1 0.700% - Lambda_2 0.600%: MSE 0.007%, PICP 0.998%, MPIW 0.542%

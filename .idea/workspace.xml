@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="7003795d-4b7d-4b5b-b853-031efc69fe50" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="ExportToHTMLSettings">
+    <option name="printScope" value="1" />
+    <option name="PRINT_LINE_NUMBERS" value="true" />
+    <option name="OPEN_IN_BROWSER" value="true" />
+    <option name="OUTPUT_DIRECTORY" value="$PROJECT_DIR$/../PredictionIntervals\exportToHTML" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+        <option value="Jupyter Notebook" />
+      </list>
+    </option>
+  </component>
+  <component name="JupyterTrust" id="cf500767-c5bb-4500-ae29-1022b168ac6e">
+    <option name="files">
+      <option value="Demo.ipynb" />
+      <option value="Demo2.ipynb" />
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="23iM6HVPOXHZpTJcfESHTsoXLAS" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "true",
+    "nodejs_package_manager_path": "npm"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\w63x712\Documents\Machine_Learning\PredictionIntervals\TuningResults\Boston\QD" />
+      <recent name="C:\Users\w63x712\Documents\Machine_Learning\PredictionIntervals\model" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\w63x712\Documents\Machine_Learning\PredictionIntervals" />
+      <recent name="C:\Users\w63x712\Documents\Machine_Learning\PredictionIntervals\models" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.Main">
+    <configuration name="Main" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="PredictionIntervals" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\w63x712\Documents\Machine_Learning\PredictionIntervals\PIGenerator.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="NNModel" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="PredictionIntervals" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/models" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/models/NNModel.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="ParetoFront" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="PredictionIntervals" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\w63x712\Documents\Machine_Learning\PredictionIntervals\StatisticsandPlots.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="StatisticsandPlots" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="PredictionIntervals" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/StatisticsandPlots.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="PredictionIntervals" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="utils" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="PredictionIntervals" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/utils.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.Main" />
+        <item itemvalue="Python.StatisticsandPlots" />
+        <item itemvalue="Python.Main" />
+        <item itemvalue="Python.StatisticsandPlots" />
+        <item itemvalue="Python.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7003795d-4b7d-4b5b-b853-031efc69fe50" name="Default Changelist" comment="" />
+      <created>1642212276870</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1642212276870</updated>
+      <workItem from="1642212278255" duration="8978000" />
+      <workItem from="1642249111018" duration="33939000" />
+      <workItem from="1642697062921" duration="345000" />
+      <workItem from="1645222695986" duration="98579000" />
+      <workItem from="1645549404376" duration="75043000" />
+      <workItem from="1645897145244" duration="1114000" />
+      <workItem from="1645899042532" duration="501000" />
+      <workItem from="1645908273710" duration="77419000" />
+      <workItem from="1646432324377" duration="23432000" />
+      <workItem from="1646677239768" duration="7975000" />
+      <workItem from="1646697286030" duration="29912000" />
+      <workItem from="1647020916796" duration="578000" />
+      <workItem from="1647069065401" duration="29000" />
+      <workItem from="1647460870069" duration="10945000" />
+      <workItem from="1647491039570" duration="405000" />
+      <workItem from="1647491882481" duration="1639000" />
+      <workItem from="1647493754686" duration="635000" />
+      <workItem from="1647494411581" duration="670000" />
+      <workItem from="1647524722821" duration="19135000" />
+      <workItem from="1647755748500" duration="19427000" />
+      <workItem from="1648045598437" duration="76701000" />
+      <workItem from="1648515677375" duration="32361000" />
+      <workItem from="1648853734496" duration="75627000" />
+      <workItem from="1649508487804" duration="21875000" />
+      <workItem from="1649685117424" duration="5236000" />
+      <workItem from="1649779556909" duration="12050000" />
+      <workItem from="1650026643305" duration="40039000" />
+      <workItem from="1650369387702" duration="23759000" />
+      <workItem from="1650458628883" duration="1194000" />
+      <workItem from="1651555781612" duration="5412000" />
+      <workItem from="1651582221705" duration="657000" />
+      <workItem from="1651582888077" duration="88000" />
+      <workItem from="1651582987903" duration="3140000" />
+      <workItem from="1651586145674" duration="6461000" />
+      <workItem from="1651611242621" duration="3579000" />
+      <workItem from="1651630265241" duration="5503000" />
+      <workItem from="1651673813426" duration="9856000" />
+      <workItem from="1651757420682" duration="1573000" />
+      <workItem from="1651776232622" duration="5875000" />
+      <workItem from="1652016834944" duration="1298000" />
+      <workItem from="1652188911062" duration="1923000" />
+      <workItem from="1652402721664" duration="1205000" />
+      <workItem from="1659359249385" duration="47401000" />
+      <workItem from="1659488826602" duration="16000" />
+      <workItem from="1659746279303" duration="12300000" />
+      <workItem from="1659830455021" duration="52183000" />
+      <workItem from="1660060345414" duration="5582000" />
+      <workItem from="1660135568771" duration="4738000" />
+      <workItem from="1660165808238" duration="11075000" />
+      <workItem from="1660222526876" duration="122862000" />
+      <workItem from="1660839336902" duration="9054000" />
+      <workItem from="1660913411363" duration="918000" />
+      <workItem from="1661006218173" duration="34773000" />
+      <workItem from="1661546609729" duration="10822000" />
+      <workItem from="1661859480948" duration="8185000" />
+      <workItem from="1662736064857" duration="577000" />
+      <workItem from="1662739726174" duration="598000" />
+      <workItem from="1663644599863" duration="3139000" />
+      <workItem from="1663707439699" duration="598000" />
+      <workItem from="1664236945056" duration="851000" />
+      <workItem from="1665084022464" duration="815000" />
+      <workItem from="1667602105464" duration="2814000" />
+      <workItem from="1668557661714" duration="717000" />
+      <workItem from="1668878724098" duration="143000" />
+      <workItem from="1669319204631" duration="1294000" />
+      <workItem from="1673472469984" duration="2629000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/PredictionIntervals$Main.coverage" NAME="Main Coverage Results" MODIFIED="1667705547187" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+</project>

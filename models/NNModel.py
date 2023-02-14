@@ -189,33 +189,29 @@ class NNModel:
             torch.backends.cudnn.benchmark = False
         # Otherwise, QD+ and QD need to generate different NNs each time in order to create a diverse ensemble
 
-        indexes = np.arange(len(Xtrain))  # Prepare list of indexes for shuffling
+        # Prepare list of indexes for shuffling
+        indexes = np.arange(len(Xtrain))
         np.random.shuffle(indexes)
         Xtrain = Xtrain[indexes]
         Ytrain = Ytrain[indexes]
-
-        indexes = np.arange(len(Xtrain))  # Prepare list of indexes for shuffling
-        np.random.shuffle(indexes)
         T = np.ceil(1.0 * len(Xtrain) / batch_size).astype(np.int32)  # Compute the number of steps in an epoch
 
+        # Variables initialization
         val_mse = np.infty
         val_picp = 0
         val_mpiw = np.infty
-        MPIWtr = []
-        PICPtr = []
-        MSEtr = []
-        MPIW = []
-        PICP = []
-        MSE = []
-        BETA = []
+        MPIWtr, PICPtr, MSEtr, MPIW, PICP, MSE, BETA = [], [], [], [], [], [], []
         widths = [0]
         picp, picptr, max_picptr, epoch_max_picptr = 0, 0, 0, 0
         first95 = True  # This is a flag used to check if validation PICP has already reached 95% during the training
         first100 = False  # This is a flag used to check if training PICP has already reached 100% during the training
         top = 1
         alpha_0 = alpha_
+        err_prev, err_new, beta_, beta_prev, d_err = 0, 0, 1, 0, 1
 
+        ##################################################
         # If model AQD, start with the pre-trained network
+        ##################################################
         if self.method in ['DualAQD']:
             self.basemodel = NNModel(self.device, self.nfeatures, 'MCDropout')
             filepathbase = filepath.replace('DualAQD', 'MCDropout')
@@ -226,15 +222,14 @@ class NNModel:
                                            self.basemodel.model.network.named_parameters()):
                 if 'out' not in target_param[0]:
                     target_param[1].data.copy_(param[1].data)
-        err_prev, err_new, beta_, beta_prev, d_err = 0, 0, 1, 0, 1
 
+        ##################################################
+        # Start training
+        ##################################################
         for epoch in trange(epochs):  # Epoch loop
             # Batch sorting
             if epoch > 0 and (self.method in ['AQD', 'DualAQD', 'QD', 'QD+']):
                 indexes = np.argsort(widths)
-
-            # indexes = np.arange(len(Xtrain))  # Prepare list of indexes for shuffling
-            # np.random.shuffle(indexes)
 
             self.model.network.train()  # Sets training mode
             running_loss = 0.0
@@ -305,6 +300,9 @@ class NNModel:
                 ypredtr = utils.reverseMinMaxScale(ypredtr, yscale[0], yscale[1])
                 ypred = utils.reverseMinMaxScale(ypred, yscale[0], yscale[1])
 
+                ##################################################
+                # Calculate metrics
+                ##################################################
                 # Calculate MSE
                 if self.method in ['DualAQD', 'QD+']:
                     msetr = utils.mse(Ytrain_original, ypredtr[:, 2])
@@ -342,6 +340,9 @@ class NNModel:
                     # Get a vector of all the PI widths in the training set
                     widths = (y_utr - y_ltr).cpu().numpy()
 
+            ##################################################
+            # Save model if there's improvement
+            ##################################################
             # Save model if PICP increases
             if self.method in ['AQD', 'DualAQD', 'QD+', 'QD']:
                 # Criteria 1: If <95, choose max picp, if picp>95, choose any picp if width<minimum width
@@ -361,17 +362,19 @@ class NNModel:
                     if filepath is not None:
                         torch.save(self.model.network.state_dict(), filepath)
 
+            ##################################################
+            # Adaptive hyperparameter algorithm
+            ##################################################
             # Check if picp has reached convergence
             if picptr > max_picptr:
                 max_picptr = picptr
                 epoch_max_picptr = epoch
             else:
                 if epoch == epoch_max_picptr + 30 and \
-                        picptr <= max_picptr:  # If 20 epochs have passed without increasing PICP
+                        picptr <= max_picptr:  # If 30 epochs have passed without increasing PICP
                     first100 = True
                     top = .95
                     alpha_0 = alpha_ / 2
-
             # Beta hyperparameter
             if picptr >= 0.999 and not first100:
                 first100 = True
@@ -382,6 +385,9 @@ class NNModel:
             # Update parameters
             BETA.append(beta_)
 
+            ##################################################
+            # Print
+            ##################################################
             # Print every 10 epochs
             if printProcess and epoch % 10 == 0:
                 if self.method == 'MCDropout':
@@ -389,13 +395,8 @@ class NNModel:
                 else:
                     print('VALIDATION: Training_MSE: %.5f. Best_MSEval: %.5f. MSE val: %.5f. PICP val: %.5f. '
                           'MPIW val: %.5f' % (msetr, val_mse, mse, picp, width))
-                    print(val_picp)
-                    print(val_mpiw)
-                    print(picptr)
-                    print(beta_)
-                    print(first100)
 
-        # Save model
+        # Save training metrics
         if filepath is not None:
             with open(filepath + '_validationMSE', 'wb') as fil:
                 pickle.dump(val_mse, fil)

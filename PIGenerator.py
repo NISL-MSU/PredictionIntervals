@@ -101,93 +101,92 @@ class PIGenerator:
         ntrain = 1
         # Iterate through each partition
         for first, second in iterator:
-            if ntrain >= 1:
-                if crossval == '10x1':
-                    # Gets the list of training and test images using kfold.split
-                    train = np.array(first)
-                    test = np.array(second)
-                else:
-                    # Split the dataset in 2 parts with the current seed
-                    train, test = train_test_split(range(len(self.X)), test_size=0.50, random_state=second)
-                    train = np.array(train)
-                    test = np.array(test)
+            if crossval == '10x1':
+                # Gets the list of training and test images using kfold.split
+                train = np.array(first)
+                test = np.array(second)
+            else:
+                # Split the dataset in 2 parts with the current seed
+                train, test = train_test_split(range(len(self.X)), test_size=0.50, random_state=second)
+                train = np.array(train)
+                test = np.array(test)
 
-                print("\n******************************")
-                print("Training fold: " + str(ntrain))
-                print("******************************")
-                # Normalize using the training set
-                Xtrain, means, stds = utils.normalize(self.X[train])
-                Ytrain, maxs, mins = utils.minMaxScale(self.Y[train])
-                Xval = utils.applynormalize(self.X[test], means, stds)
-                Yval = utils.applyMinMaxScale(self.Y[test], maxs, mins)
+            print("\n******************************")
+            print("Training fold: " + str(ntrain))
+            print("******************************")
+            # Normalize using the training set
+            Xtrain, means, stds = utils.normalize(self.X[train])
+            Ytrain, maxs, mins = utils.minMaxScale(self.Y[train])
+            Xval = utils.applynormalize(self.X[test], means, stds)
+            Yval = utils.applyMinMaxScale(self.Y[test], maxs, mins)
 
-                # Define path where the model will be saved
-                filepath = folder + "//weights-" + self.method + "-" + self.dataset + "-" + str(ntrain)
+            # Define path where the model will be saved
+            filepath = folder + "//weights-" + self.method + "-" + self.dataset + "-" + str(ntrain)
 
-                # Train model(s). AQD and MCDropout use one model while QD and QD+ use an ensemble of 5 models
-                mse, PICP, MPIW = None, None, None
+            # Train model(s). AQD and MCDropout use one model while QD and QD+ use an ensemble of 5 models
+            mse, PICP, MPIW = None, None, None
+            if self.method in ['DualAQD', 'MCDropout']:
+                m = 1
+            else:
+                m = 5
+                filepath = [filepath] * m  # Array that will contain the filepath of each model of the ensemble
+            for mi in range(m):
                 if self.method in ['DualAQD', 'MCDropout']:
-                    m = 1
+                    f = filepath
                 else:
-                    m = 5
-                    filepath = [filepath] * m  # Array that will contain the filepath of each model of the ensemble
-                for mi in range(m):
-                    if self.method in ['DualAQD', 'MCDropout']:
-                        f = filepath
-                    else:
-                        filepath[mi] = filepath[mi] + "-Model" + str(mi)
-                        f = filepath[mi]
-                    # Train the model using the current training-validation split
-                    self.model = self.reset_model()
-                    _, _, _, mse, PICP, MPIW = self.model.trainFold(Xtrain=Xtrain, Ytrain=Ytrain, Xval=Xval, Yval=Yval,
-                                                                    batch_size=batch_size, epochs=epochs, filepath=f,
-                                                                    printProcess=printProcess, alpha_=alpha_,
-                                                                    yscale=[maxs, mins])
-
-                # Run the model over the validation set 'MC-samples' times and Calculate PIs and metrics
-                if self.method not in ['DualAQD']:  # DualAQD already performs validation and aggregation in "trainFold"
-                    [mse, PICP, MPIW, ypred, y_u, y_l] = self.calculate_metrics(Xval, Yval, maxs, mins, filepath)
-                print('PERFORMANCE AFTER AGGREGATION:')
-                print("Val MSE: " + str(mse) + " Val PICP: " + str(PICP) + " Val MPIW: " + str(MPIW))
-
-                # Add metrics to the list
-                cvmse.append(mse)
-                cvpicp.append(PICP)
-                cvmpiw.append(MPIW)
-
-                # Plot synthetic dataset using results from the last validation fold
-                if self.dataset == "Synth":  # and ntrain == 10:
-                    if self.method in ['DualAQD']:
-                        self.model.loadModel(filepath)
-                        yout = self.model.evaluateFoldUncertainty(valxn=Xval, maxs=None, mins=None, batch_size=32,
-                                                                  MC_samples=50)
-                        yout = np.array(yout)
-                        # Obtain upper and lower bounds
-                        y_u = np.mean(yout[:, 0], axis=1)
-                        y_l = np.mean(yout[:, 1], axis=1)
-                        ypred = np.mean(yout[:, 2], axis=1)
-                        ypred = utils.reverseMinMaxScale(ypred, maxs, mins)
-                        y_u = utils.reverseMinMaxScale(y_u, maxs, mins)
-                        y_l = utils.reverseMinMaxScale(y_l, maxs, mins)
-                    Xvalp = utils.reversenormalize(Xval, means, stds)
-                    _, _, P1, P2 = utils.create_synth_data(plot=True)
-                    diffs = 0
-                    for iv, x in enumerate(test):
-                        ubound, lbound = P1[x], P2[x]
-                        diffs += np.abs(ubound - y_u[iv]) + np.abs(y_l[iv] - lbound)
-                    cvdiffs.append(diffs)
-                    plt.scatter(Xvalp[:, 0], ypred, label='Predicted Data', s=24)
-                    plt.scatter(Xvalp[:, 0], y_u, label='Predicted Upper Bounds', s=24)
-                    plt.scatter(Xvalp[:, 0], y_l, label='Predicted Lower Bounds', s=24, c='gold')
-                    plt.legend(bbox_to_anchor=(1.06, 0.6), fontsize=18)
-                    plt.title(self.method, fontsize=24)
-                    plt.xlabel('x', fontsize=22)
-                    plt.ylabel('y', fontsize=22)
-                    plt.xticks(fontsize=22)
-                    plt.yticks(fontsize=22)
-
-                # Reset all weights
+                    filepath[mi] = filepath[mi] + "-Model" + str(mi)
+                    f = filepath[mi]
+                # Train the model using the current training-validation split
                 self.model = self.reset_model()
+                _, _, _, mse, PICP, MPIW = self.model.trainFold(Xtrain=Xtrain, Ytrain=Ytrain, Xval=Xval, Yval=Yval,
+                                                                batch_size=batch_size, epochs=epochs, filepath=f,
+                                                                printProcess=printProcess, alpha_=alpha_,
+                                                                yscale=[maxs, mins])
+
+            # Run the model over the validation set 'MC-samples' times and Calculate PIs and metrics
+            if self.method not in ['DualAQD']:  # DualAQD already performs validation and aggregation in "trainFold"
+                [mse, PICP, MPIW, ypred, y_u, y_l] = self.calculate_metrics(Xval, Yval, maxs, mins, filepath)
+            print('PERFORMANCE AFTER AGGREGATION:')
+            print("Val MSE: " + str(mse) + " Val PICP: " + str(PICP) + " Val MPIW: " + str(MPIW))
+
+            # Add metrics to the list
+            cvmse.append(mse)
+            cvpicp.append(PICP)
+            cvmpiw.append(MPIW)
+
+            # Plot synthetic dataset using results from the last validation fold
+            if self.dataset == "Synth":  # and ntrain == 10:
+                if self.method in ['DualAQD']:
+                    self.model.loadModel(filepath)
+                    yout = self.model.evaluateFoldUncertainty(valxn=Xval, maxs=None, mins=None, batch_size=32,
+                                                              MC_samples=50)
+                    yout = np.array(yout)
+                    # Obtain upper and lower bounds
+                    y_u = np.mean(yout[:, 0], axis=1)
+                    y_l = np.mean(yout[:, 1], axis=1)
+                    ypred = np.mean(yout[:, 2], axis=1)
+                    ypred = utils.reverseMinMaxScale(ypred, maxs, mins)
+                    y_u = utils.reverseMinMaxScale(y_u, maxs, mins)
+                    y_l = utils.reverseMinMaxScale(y_l, maxs, mins)
+                Xvalp = utils.reversenormalize(Xval, means, stds)
+                _, _, P1, P2 = utils.create_synth_data(plot=True)
+                diffs = 0
+                for iv, x in enumerate(test):
+                    ubound, lbound = P1[x], P2[x]
+                    diffs += np.abs(ubound - y_u[iv]) + np.abs(y_l[iv] - lbound)
+                cvdiffs.append(diffs)
+                plt.scatter(Xvalp[:, 0], ypred, label='Predicted Data', s=24)
+                plt.scatter(Xvalp[:, 0], y_u, label='Predicted Upper Bounds', s=24)
+                plt.scatter(Xvalp[:, 0], y_l, label='Predicted Lower Bounds', s=24, c='gold')
+                plt.legend(bbox_to_anchor=(1.06, 0.6), fontsize=18)
+                plt.title(self.method, fontsize=24)
+                plt.xlabel('x', fontsize=22)
+                plt.ylabel('y', fontsize=22)
+                plt.xticks(fontsize=22)
+                plt.yticks(fontsize=22)
+
+            # Reset all weights
+            self.model = self.reset_model()
 
             ntrain += 1
 

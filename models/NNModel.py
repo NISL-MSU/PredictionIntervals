@@ -1,3 +1,4 @@
+import sys
 import utils
 import torch
 import pickle
@@ -41,8 +42,13 @@ def DualAQD_objective(y_pred, y_true, beta_, pe):
 
     MPIW_p = torch.mean(torch.abs(y_u - y_true) + torch.abs(y_true - y_l))  # Calculate MPIW_penalty
     cs = torch.max(torch.abs(y_o - y_true).detach())
+    # DualAQD reported in the paper
     Constraints = (torch.exp(torch.mean(-y_u + y_true) + cs) +
                    torch.exp(torch.mean(-y_true + y_l) + cs))
+
+    # IMPORTANT:
+    # Alternatively, this function works slightly better but needs a separate fine-tuning
+    # Constraints = (torch.exp(torch.max(torch.mean(-y_u + y_true) + cs, torch.mean(-y_true + y_l) + cs)))
 
     # Calculate loss
     Loss_S = MPIW_p + Constraints * beta_
@@ -205,7 +211,7 @@ class NNModel:
         picp, picptr, max_picptr, epoch_max_picptr = 0, 0, 0, 0
         first95 = True  # This is a flag used to check if validation PICP has already reached 95% during the training
         first100 = False  # This is a flag used to check if training PICP has already reached 100% during the training
-        top = 1
+        top = .95
         alpha_0 = alpha_
         err_prev, err_new, beta_, beta_prev, d_err = 0, 0, 1, 0, 1
 
@@ -217,7 +223,10 @@ class NNModel:
             filepathbase = filepath.replace('DualAQD', 'MCDropout')
             if 'TuningResults' in filepathbase:
                 filepathbase = filepathbase.replace('TuningResults', 'CVResults')
-            self.basemodel.loadModel(filepathbase)
+            try:
+                self.basemodel.loadModel(filepathbase)
+            except FileNotFoundError:
+                sys.exit("The 'MCDropout' method needs be run first. It will generate the target-estimation NN 'f'")
             for target_param, param in zip(self.model.network.named_parameters(),
                                            self.basemodel.model.network.named_parameters()):
                 if 'out' not in target_param[0]:
@@ -395,6 +404,10 @@ class NNModel:
                 else:
                     print('VALIDATION: Training_MSE: %.5f. Best_MSEval: %.5f. MSE val: %.5f. PICP val: %.5f. '
                           'MPIW val: %.5f' % (msetr, val_mse, mse, picp, width))
+                    print(val_picp)
+                    print(val_mpiw)
+                    print(picptr)
+                    print(beta_)
 
         # Save training metrics
         if filepath is not None:

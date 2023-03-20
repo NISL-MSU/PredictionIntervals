@@ -88,8 +88,11 @@ def create_synth_data(n=1000, plot=False):
     P2 = orig - 1.96 * gauss
     if plot:
         plt.figure(figsize=(9.97, 7.66))
-        plt.fill_between(X, P1, P2, color='gray', alpha=0.5, linewidth=0, label='Ideal 95% PIs')
+        # plt.fill_between(X, P1, P2, color='gray', alpha=0.5, linewidth=0, label='Ideal 95% PIs')
         plt.scatter(X, Y, label='Data with noise')
         plt.plot(X, orig, 'r', label='True signal')
         plt.legend()
     return X, Y, P1, P2
+
+
+create_synth_data(n = 100)

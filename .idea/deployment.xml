@@ -5,7 +5,7 @@
       <paths name="KRAKEN">
         <serverdata>
           <mappings>
-            <mapping deploy="/PredictionIntervals" local="$PROJECT_DIR$" web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>

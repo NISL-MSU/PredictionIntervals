@@ -5,6 +5,9 @@
       <sshConfig authType="PASSWORD" connectionConfig="{&quot;serverAliveInterval&quot;:300}" host="kraken.msu.montana.edu" id="0fc8f810-96e8-498a-9cbe-b8397a27731f" port="22" customName="KRAKEN" nameFormat="CUSTOM" username="gmoral" useOpenSSHConfig="true">
         <option name="customName" value="KRAKEN" />
       </sshConfig>
+      <sshConfig authType="PASSWORD" connectionConfig="{&quot;serverAliveInterval&quot;:300}" host="kraken.msu.montana.edu" id="dd721e4a-9c00-4bab-bc43-f88050a6f07b" port="22" customName="KRAKEN" nameFormat="CUSTOM" useOpenSSHConfig="true">
+        <option name="customName" value="KRAKEN" />
+      </sshConfig>
     </configs>
   </component>
 </project>

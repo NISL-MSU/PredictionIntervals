@@ -6,10 +6,10 @@ import torch
 import pickle
 import itertools
 import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
 from models.NNModel import NNModel
 from sklearn.model_selection import KFold
+from Datasets.GenerateDatasets import DataLoader
 from sklearn.model_selection import train_test_split
 # Functions needed for QD+
 from models.aggregation_functions import _split_normal_aggregator  # You can comment it if you only want to test DualAQD
@@ -21,43 +21,8 @@ class PIGenerator:
 
         self.dataset = dataset
         self.method = method
-
-        # Read dataset
-        if dataset == 'Boston':
-            D = pd.read_csv('Datasets//boston_housing_data.csv')
-            self.X = D.drop(['MDEV'], axis=1).to_numpy()
-            self.Y = D['MDEV'].to_numpy()
-        elif dataset == 'Wine':
-            D = pd.read_csv('Datasets//winequality-red.csv')
-            self.X = D.drop(['quality'], axis=1).to_numpy()
-            self.Y = D['quality'].to_numpy()
-        elif dataset == 'Concrete':
-            D = pd.read_csv('Datasets//concrete_data.csv')
-            self.X = D.drop(['concrete_compressive_strength'], axis=1).to_numpy()
-            self.Y = D['concrete_compressive_strength'].to_numpy()
-        elif dataset == 'Energy':
-            D = pd.read_csv('Datasets//energy_data.csv').drop(['Y2'], axis=1)
-            self.X = D.drop(['Y1'], axis=1).to_numpy()[:768, :-2]
-            self.Y = D['Y1'].to_numpy()[:768]
-        elif dataset == 'Kin8nm':
-            D = pd.read_csv('Datasets//kin8nm_data.csv')
-            self.X = D.drop(['y'], axis=1).to_numpy()
-            self.Y = D['y'].to_numpy()
-        elif dataset == 'Naval':
-            D = pd.read_csv('Datasets//naval_data.csv').drop(['GTTurb'], axis=1)
-            self.X = D.drop(['GTComp'], axis=1).to_numpy()
-            self.Y = D['GTComp'].to_numpy()
-        elif dataset == 'Power':
-            D = pd.read_csv('Datasets//power_data.csv')
-            self.X = D.drop(['PE'], axis=1).to_numpy()
-            self.Y = D['PE'].to_numpy()
-        elif dataset == 'Yacht':
-            D = pd.read_csv('Datasets//yacht_data.csv')
-            self.X = D.drop(['Y'], axis=1).to_numpy()
-            self.Y = D['Y'].to_numpy()
-        elif dataset == 'Synth':
-            self.X, self.Y, _, _ = utils.create_synth_data()
-            self.X = np.reshape(self.X, (len(self.X), 1))
+        dataLoader = DataLoader(dataset=dataset)
+        self.X, self.Y = dataLoader.X, dataLoader.Y
 
         self.kfold = KFold(n_splits=10, shuffle=True, random_state=13)  # Initialize kfold object
 
@@ -317,12 +282,14 @@ class PIGenerator:
             epochs = 4500
         elif self.dataset == 'Wine':
             epochs = 500
+        elif self.dataset == 'Protein':
+            epochs = 3000
         elif self.dataset == 'Power':
             epochs = 4000
 
         # Define hyperparameter space
         if self.method == 'DualAQD':
-            beta_ = [0.05, 0.01, 0.005, 0.001]  # [0.01, 0.05, 0.1]
+            beta_ = [0.001, 0.005, 0.01, 0.05, 0.1]  # [0.01, 0.05, 0.1]
         elif self.method == 'QD+':
             lambda_1 = np.arange(0.2, 1, .1)
             lambda_2 = np.arange(0.2, .6, .1)
@@ -373,7 +340,7 @@ class PIGenerator:
                             filepath[mi] = filepath[mi] + "-Model" + str(mi)
                             f = filepath[mi]
                         metrics = self.model.trainFold(Xtrain=Xtrain, Ytrain=Ytrain, Xval=Xval, Yval=Yval,
-                                                       batch_size=16, epochs=epochs, filepath=f, printProcess=False,
+                                                       batch_size=16, epochs=epochs, filepath=f, printProcess=True,
                                                        alpha_=bi, yscale=[maxs, mins])
                         # Reset all weights
                         self.model = self.reset_model()
@@ -417,29 +384,34 @@ class PIGenerator:
 
 
 if __name__ == '__main__':
-    name = 'Boston'
+    name = 'Protein'
     predictor = PIGenerator(dataset=name, method='DualAQD')
-    predictor.train(crossval='10x1', batch_size=16, epochs=3000, printProcess=True, alpha_=0.01)
-    name = 'Concrete'
-    predictor = PIGenerator(dataset=name, method='DualAQD')
-    predictor.train(crossval='10x1', batch_size=16, epochs=2500, printProcess=False, alpha_=0.01)
-    name = 'Energy'
-    predictor = PIGenerator(dataset=name, method='DualAQD')
-    predictor.train(crossval='10x1', batch_size=16, epochs=3500, printProcess=False, alpha_=0.05)
-    name = 'Kin8nm'
-    predictor = PIGenerator(dataset=name, method='DualAQD')
-    predictor.train(crossval='10x1', batch_size=16, epochs=1000, printProcess=False, alpha_=0.005)
-    name = 'Power'
-    predictor = PIGenerator(dataset=name, method='DualAQD')
-    predictor.train(crossval='10x1', batch_size=16, epochs=4000, printProcess=False, alpha_=0.05)
-    name = 'Yacht'
-    predictor = PIGenerator(dataset=name, method='DualAQD')
-    predictor.train(crossval='10x1', batch_size=16, epochs=4500, printProcess=True, alpha_=0.005)
-    name = 'Synth'
-    predictor = PIGenerator(dataset=name, method='DualAQD')
-    predictor.train(crossval='10x1', batch_size=16, epochs=4500, printProcess=False, alpha_=0.005)
-
-    # TUNING EXAMPLE
-    name = 'Power'
-    predictor = PIGenerator(dataset=name, method='DualAQD')
+    # predictor.train(crossval='10x1', batch_size=512, epochs=2000, printProcess=False, alpha_=0.01)
     predictor.tune()
+
+    # name = 'Boston'
+    # predictor = PIGenerator(dataset=name, method='DualAQD')
+    # predictor.train(crossval='10x1', batch_size=16, epochs=3000, printProcess=False, alpha_=0.01)
+    # name = 'Concrete'
+    # predictor = PIGenerator(dataset=name, method='DualAQD')
+    # predictor.train(crossval='10x1', batch_size=16, epochs=3000, printProcess=False, alpha_=0.01)
+    # name = 'Energy'
+    # predictor = PIGenerator(dataset=name, method='DualAQD')
+    # predictor.train(crossval='10x1', batch_size=16, epochs=3500, printProcess=False, alpha_=0.05)
+    # name = 'Kin8nm'
+    # predictor = PIGenerator(dataset=name, method='DualAQD')
+    # predictor.train(crossval='10x1', batch_size=16, epochs=1000, printProcess=False, alpha_=0.005)
+    # name = 'Power'
+    # predictor = PIGenerator(dataset=name, method='DualAQD')
+    # predictor.train(crossval='10x1', batch_size=16, epochs=4000, printProcess=False, alpha_=0.05)
+    # name = 'Yacht'
+    # predictor = PIGenerator(dataset=name, method='DualAQD')
+    # predictor.train(crossval='10x1', batch_size=16, epochs=4500, printProcess=True, alpha_=0.005)
+    # name = 'Synth'
+    # predictor = PIGenerator(dataset=name, method='DualAQD')
+    # predictor.train(crossval='10x1', batch_size=16, epochs=4500, printProcess=False, alpha_=0.005)
+    #
+    # # TUNING EXAMPLE
+    # name = 'Power'
+    # predictor = PIGenerator(dataset=name, method='DualAQD')
+    # predictor.tune()

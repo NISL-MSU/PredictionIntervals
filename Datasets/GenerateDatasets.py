@@ -46,6 +46,8 @@ class DataLoader:
             self.X = D.drop(['RMSD'], axis=1).to_numpy()
             self.Y = D['RMSD'].to_numpy()
         elif dataset == 'Yacht':
+            # This dataset is not uploaded to GitHUb due to its size but it can be downloaded from
+            # https://archive.ics.uci.edu/ml/datasets/yearpredictionmsd
             D = pd.read_csv('Datasets//yacht_data.csv')
             self.X = D.drop(['Y'], axis=1).to_numpy()
             self.Y = D['Y'].to_numpy()

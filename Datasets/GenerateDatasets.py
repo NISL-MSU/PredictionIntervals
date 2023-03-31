@@ -49,6 +49,10 @@ class DataLoader:
             D = pd.read_csv('Datasets//yacht_data.csv')
             self.X = D.drop(['Y'], axis=1).to_numpy()
             self.Y = D['Y'].to_numpy()
+        elif dataset == 'Year':
+            D = pd.read_csv('Datasets//yearMSD_data.csv')
+            self.X = D.iloc[:, 1:].to_numpy()
+            self.Y = D.iloc[:, 0].to_numpy()
         elif dataset == 'Synth':
             self.X, self.Y, _, _ = create_synth_data()
             self.X = np.reshape(self.X, (len(self.X), 1))

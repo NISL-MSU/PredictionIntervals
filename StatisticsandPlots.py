@@ -6,7 +6,7 @@ import pandas as pd
 from scipy import stats
 
 # Box-plot
-datasets = ["Energy"]  # ["Boston", "Concrete", "Energy", "Kin8nm", "Power", "Synth", "Wine", "Yacht"]
+datasets = ["Boston", "Concrete"]  # ["Boston", "Concrete", "Energy", "Kin8nm", "Power", "Protein", "Synth", "Wine", "Yacht", "Year"]
 
 for dataset in datasets:
     for metric in ['MPIW', 'PICP', 'MSE']:

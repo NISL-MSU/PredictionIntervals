@@ -1,3 +1,3 @@
-Overall MSE 22.453804 (+/- 4.788954)
-Overall PICP 0.940777 (+/- 0.011027)
-Overall MPIW 15.882522 (+/- 1.853746)
+Overall MSE 22.801886 (+/- 4.917882)
+Overall PICP 0.951456 (+/- 0.000000)
+Overall MPIW 15.544325 (+/- 1.418343)

@@ -7,6 +7,7 @@ import numpy as np
 from tqdm import trange
 from torch import optim
 from models.network import *
+
 # import matplotlib.pyplot as plt
 
 np.random.seed(7)  # Initialize seed to get reproducible results
@@ -40,18 +41,18 @@ def DualAQD_objective(y_pred, y_true, beta_, pe):
     y_l = y_pred[:, 1]
     y_o = pe.detach().squeeze(1)
 
-    MPIW_p = torch.mean(torch.abs(y_u - y_true) + torch.abs(y_true - y_l))  # Calculate MPIW_penalty
-    cs = torch.max(torch.abs(y_o - y_true).detach())
-    # DualAQD reported in the paper
-    Constraints = (torch.exp(torch.mean(-y_u + y_true) + cs) +
-                   torch.exp(torch.mean(-y_true + y_l) + cs))
+    if beta_ is not None:
+        MPIW_p = torch.mean(torch.abs(y_u - y_true) + torch.abs(y_true - y_l))  # Calculate MPIW_penalty
+        cs = torch.max(torch.abs(y_o - y_true).detach())
+        # DualAQD reported in the paper
+        Constraints = (torch.exp(torch.mean(-y_u + y_true) + cs) +
+                       torch.exp(torch.mean(-y_true + y_l) + cs))
 
-    # IMPORTANT:
-    # Alternatively, this function works slightly better but needs a separate fine-tuning
-    # Constraints = (torch.exp(torch.max(torch.mean(-y_u + y_true) + cs, torch.mean(-y_true + y_l) + cs)))
-
-    # Calculate loss
-    Loss_S = MPIW_p + Constraints * beta_
+        # Calculate loss
+        Loss_S = MPIW_p + Constraints * beta_
+    else:  # During the first epochs, the lower and upper bounds are trained to match the output of the first NN
+        MPIW_p = torch.mean(torch.abs(y_u - y_o) + torch.abs(y_o - y_l))  # Calculate MPIW_penalty
+        Loss_S = MPIW_p
 
     return Loss_S
 
@@ -72,7 +73,7 @@ def AQD_objective(y_pred, y_true, beta_):
                    torch.exp(torch.mean(-y_o.detach() + y_l) + torch.max(torch.abs(y_o.detach() - y_true)).detach()) +
                    torch.exp(torch.mean(-y_u + y_l)))
     # Calculate loss
-    Loss_S = (1 - beta_[0]) * MPIW_p + MSE * beta_[0] + Constraints * beta_[1]
+    Loss_S = MPIW_p + MSE * beta_[0] + Constraints * beta_[1]
 
     return Loss_S
 
@@ -210,8 +211,9 @@ class NNModel:
         widths = [0]
         picp, picptr, max_picptr, epoch_max_picptr = 0, 0, 0, 0
         first95 = True  # This is a flag used to check if validation PICP has already reached 95% during the training
-        first100 = False  # This is a flag used to check if training PICP has already reached 100% during the training
-        top = .95
+        # first100 = False  # This is a flag used to check if training PICP has already reached 100% during the training
+        warmup = 10  # Warmup period. Just helps to get rid of inconsistencies faster
+        top = 1
         alpha_0 = alpha_
         err_prev, err_new, beta_, beta_prev, d_err = 0, 0, 1, 0, 1
 
@@ -237,15 +239,21 @@ class NNModel:
         ##################################################
         for epoch in trange(epochs):  # Epoch loop
             # Batch sorting
-            if epoch > 0 and (self.method in ['AQD', 'DualAQD', 'QD', 'QD+']):
+            if epoch > warmup and (self.method in ['DualAQD', 'QD', 'QD+']):
                 indexes = np.argsort(widths)
+            else:
+                np.random.shuffle(indexes)
+
+            # Shuffle batches
+            list_inds = []
+            for step in range(T):  # Batch loop
+                # Generate indexes of the batch
+                list_inds.append(indexes[step * batch_size:(step + 1) * batch_size])
+            random.shuffle(list_inds)
 
             self.model.network.train()  # Sets training mode
             running_loss = 0.0
-            for step in range(T):  # Batch loop
-                # Generate indexes of the batch
-                inds = indexes[step * batch_size:(step + 1) * batch_size]
-
+            for step, inds in enumerate(list_inds[:-1]):  # Batch loop
                 # Get actual batches
                 Xtrainb = torch.from_numpy(Xtrain[inds]).float().to(self.device)
                 Ytrainb = torch.from_numpy(Ytrain[inds]).float().to(self.device)
@@ -255,13 +263,12 @@ class NNModel:
 
                 # forward + backward + optimize
                 outputs = self.model.network(Xtrainb)
-                if self.method == 'AQD':
-                    if not isinstance(alpha_, list):
-                        alpha_ = [0.8, 0.2]
-                    loss = AQD_objective(outputs, Ytrainb, beta_=alpha_)
-                elif self.method == 'DualAQD':
+                if self.method == 'DualAQD':
                     point_estimates = self.basemodel.model.network(Xtrainb)
-                    loss = DualAQD_objective(outputs, Ytrainb, beta_=beta_, pe=point_estimates)
+                    if epoch > warmup:
+                        loss = DualAQD_objective(outputs, Ytrainb, beta_=beta_, pe=point_estimates)
+                    else:  # During the warmup period the objective is that \hat{y}^u = \hat{y}^l = \hat{y}
+                        loss = DualAQD_objective(outputs, Ytrainb, beta_=None, pe=point_estimates)
                 elif self.method == 'QD':
                     loss = QD_objective(outputs, Ytrainb, device=self.device, beta_=alpha_)
                 elif self.method == 'QD+':
@@ -281,25 +288,11 @@ class NNModel:
             with torch.no_grad():
                 self.model.network.eval()
                 if self.method in ['DualAQD', 'MCDropout']:  # These methods use mult forward passes w active dropout
-                    enable_dropout(self.model.network)
-                    ypredtr, ypred, petr, pe = 0, 0, 0, 0
                     samples = 50
-                    for r in range(samples):
-                        ypredtr += self.model.network(torch.from_numpy(Xtrain).float().to(self.device)).cpu().numpy()
-                        ypred += self.model.network(torch.from_numpy(Xval).float().to(self.device)).cpu().numpy()
-                        if self.method in ['DualAQD']:  # Include base model outputs
-                            self.basemodel.model.network.eval()
-                            petr += self.basemodel.model.network(torch.from_numpy(Xtrain).float().
-                                                                 to(self.device)).cpu().numpy()
-                            pe += self.basemodel.model.network(torch.from_numpy(Xval).float().
-                                                               to(self.device)).cpu().numpy()
-                    ypredtr /= samples
-                    ypred /= samples
-                    if self.method in ['DualAQD']:  # Attach base model output to the last column
-                        petr /= samples
-                        pe /= samples
-                        ypredtr = np.concatenate((ypredtr, petr), axis=1)
-                        ypred = np.concatenate((ypred, pe), axis=1)
+                    ypredtr = self.evaluateFoldUncertainty(valxn=Xtrain, batch_size=len(Xtrain), MC_samples=samples)
+                    ypred = self.evaluateFoldUncertainty(valxn=Xval, batch_size=len(Xval), MC_samples=samples)
+                    ypredtr = np.mean(ypredtr, axis=2)
+                    ypred = np.mean(ypred, axis=2)
                 else:
                     ypredtr = self.model.network(torch.from_numpy(Xtrain).float().to(self.device)).cpu().numpy()
                     ypred = self.model.network(torch.from_numpy(Xval).float().to(self.device)).cpu().numpy()
@@ -348,12 +341,13 @@ class NNModel:
                     PICP.append(picp)
                     # Get a vector of all the PI widths in the training set
                     widths = (y_utr - y_ltr).cpu().numpy()
+                    # widths = np.abs(Ytrain_original - ypredtr[:, 2])
 
             ##################################################
             # Save model if there's improvement
             ##################################################
             # Save model if PICP increases
-            if self.method in ['AQD', 'DualAQD', 'QD+', 'QD']:
+            if self.method in ['DualAQD', 'QD+', 'QD']:
                 # Criteria 1: If <95, choose max picp, if picp>95, choose any picp if width<minimum width
                 if (((val_picp == picp < .95 and width < val_mpiw) or (val_picp < picp < .95)) and first95) or \
                         (picp >= 0.9499 and first95) or \
@@ -375,24 +369,25 @@ class NNModel:
             # Adaptive hyperparameter algorithm
             ##################################################
             # Check if picp has reached convergence
-            if picptr > max_picptr:
-                max_picptr = picptr
-                epoch_max_picptr = epoch
-            else:
-                if epoch == epoch_max_picptr + 30 and \
-                        picptr <= max_picptr:  # If 30 epochs have passed without increasing PICP
-                    first100 = True
-                    top = .95
-                    alpha_0 = alpha_ / 2
-            # Beta hyperparameter
-            if picptr >= 0.999 and not first100:
-                first100 = True
-                top = .95
-                alpha_0 = alpha_ / 2
-            err_new = top - picptr
-            beta_ = beta_ + alpha_0 * err_new
-            # Update parameters
-            BETA.append(beta_)
+            if epoch >= warmup and self.method == 'DualAQD':
+                if picptr > max_picptr:
+                    max_picptr = picptr
+                    epoch_max_picptr = epoch
+                else:
+                    if epoch == epoch_max_picptr + 500 and \
+                            picptr <= max_picptr:  # If 500 epochs have passed without increasing PICP
+                        top = .95
+                        # first100 = True
+                        # alpha_0 = alpha_ / 2
+                # if picptr >= 0.999 and not first100:
+                #     first100 = True
+                #     top = .95
+                # alpha_0 = alpha_ / 2
+                # Beta hyperparameter
+                err_new = top - picptr
+                beta_ = beta_ + alpha_0 * err_new
+                # Update parameters
+                BETA.append(beta_)
 
             ##################################################
             # Print
@@ -408,6 +403,7 @@ class NNModel:
                     print(val_mpiw)
                     print(picptr)
                     print(beta_)
+                    print(top)
 
         # Save training metrics
         if filepath is not None:
@@ -457,7 +453,7 @@ class NNModel:
 
         return ypred
 
-    def evaluateFoldUncertainty(self, valxn, maxs, mins, batch_size, MC_samples):
+    def evaluateFoldUncertainty(self, valxn, maxs=None, mins=None, batch_size=512, MC_samples=50):
         """Retrieve point predictions and PIs"""
         np.random.seed(7)  # Initialize seed to get reproducible results
         random.seed(7)

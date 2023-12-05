@@ -371,7 +371,7 @@ class NNModel:
                     max_picptr = picptr
                     epoch_max_picptr = epoch
                 else:
-                    if epoch == epoch_max_picptr + 500 and \
+                    if epoch == epoch_max_picptr + 100 and \
                             picptr <= max_picptr:  # If 500 epochs have passed without increasing PICP
                         top = .95
 

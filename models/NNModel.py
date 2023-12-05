@@ -348,8 +348,7 @@ class NNModel:
             if self.method in ['DualAQD', 'QD+', 'QD']:
                 # Criteria 1: If <95, choose max picp, if picp>95, choose any picp if width<minimum width
                 if (((val_picp == picp < .95 and width < val_mpiw) or (val_picp < picp < .95)) and first95) or \
-                        (picp >= 0.9499 and first95) or \
-                        (picp >= 0.9499 and width < val_mpiw and not first95):  # and val_std < std
+                        (picp >= 0.9499 and first95) or (picp >= 0.9499 and width < val_mpiw and not first95):
                     if picp >= .9499:
                         first95 = False
                     val_mse = mse

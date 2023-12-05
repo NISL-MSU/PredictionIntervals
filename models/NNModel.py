@@ -211,7 +211,6 @@ class NNModel:
         widths = [0]
         picp, picptr, max_picptr, epoch_max_picptr = 0, 0, 0, 0
         first95 = True  # This is a flag used to check if validation PICP has already reached 95% during the training
-        # first100 = False  # This is a flag used to check if training PICP has already reached 100% during the training
         warmup = 10  # Warmup period. Just helps to get rid of inconsistencies faster
         top = 1
         alpha_0 = alpha_
@@ -341,7 +340,6 @@ class NNModel:
                     PICP.append(picp)
                     # Get a vector of all the PI widths in the training set
                     widths = (y_utr - y_ltr).cpu().numpy()
-                    # widths = np.abs(Ytrain_original - ypredtr[:, 2])
 
             ##################################################
             # Save model if there's improvement
@@ -377,12 +375,7 @@ class NNModel:
                     if epoch == epoch_max_picptr + 500 and \
                             picptr <= max_picptr:  # If 500 epochs have passed without increasing PICP
                         top = .95
-                        # first100 = True
-                        # alpha_0 = alpha_ / 2
-                # if picptr >= 0.999 and not first100:
-                #     first100 = True
-                #     top = .95
-                # alpha_0 = alpha_ / 2
+
                 # Beta hyperparameter
                 err_new = top - picptr
                 beta_ = beta_ + alpha_0 * err_new
@@ -399,11 +392,6 @@ class NNModel:
                 else:
                     print('VALIDATION: Training_MSE: %.5f. Best_MSEval: %.5f. MSE val: %.5f. PICP val: %.5f. '
                           'MPIW val: %.5f' % (msetr, val_mse, mse, picp, width))
-                    print(val_picp)
-                    print(val_mpiw)
-                    print(picptr)
-                    print(beta_)
-                    print(top)
 
         # Save training metrics
         if filepath is not None:

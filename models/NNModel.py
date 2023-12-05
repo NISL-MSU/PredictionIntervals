@@ -290,8 +290,8 @@ class NNModel:
                     samples = 50
                     ypredtr = self.evaluateFoldUncertainty(valxn=Xtrain, batch_size=len(Xtrain), MC_samples=samples)
                     ypred = self.evaluateFoldUncertainty(valxn=Xval, batch_size=len(Xval), MC_samples=samples)
-                    ypredtr = np.mean(ypredtr, axis=2)
-                    ypred = np.mean(ypred, axis=2)
+                    ypredtr = np.mean(ypredtr, axis=-1)
+                    ypred = np.mean(ypred, axis=-1)
                 else:
                     ypredtr = self.model.network(torch.from_numpy(Xtrain).float().to(self.device)).cpu().numpy()
                     ypred = self.model.network(torch.from_numpy(Xval).float().to(self.device)).cpu().numpy()
@@ -312,8 +312,8 @@ class NNModel:
                     msetr = utils.mse(Ytrain_original, (ypredtr[:, 0] + ypredtr[:, 1]) / 2)
                     mse = utils.mse(Yval_original, (ypred[:, 0] + ypred[:, 1]) / 2)
                 else:
-                    msetr = utils.mse(Ytrain_original, ypredtr[:, 0])
-                    mse = utils.mse(Yval_original, ypred[:, 0])
+                    msetr = utils.mse(Ytrain_original, ypredtr)
+                    mse = utils.mse(Yval_original, ypred)
                 MSEtr.append(msetr)
                 MSE.append(mse)
                 if self.method in ['DualAQD', 'QD', 'QD+']:

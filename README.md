@@ -8,6 +8,9 @@ We designed a loss function, [DualAQD](https://arxiv.org/abs/2212.06370), for th
 Both objectives are balanced within the loss function using a self-adaptive coefficient.
 Furthermore, we apply a Monte Carlo-based approach that evaluates the model uncertainty in the learned PIs.
 
+
+<img src=[https://github.com/GiorgioMorales/HSI-BandSelection/blob/master/Figures/Comparison1.jpg](https://raw.githubusercontent.com/GiorgioMorales/PredictionIntervals/master/images/introduction.jpg) alt="alt text" width=550 height=420>
+
 ## Usage
 
 This repository contains the following scripts:

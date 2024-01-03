@@ -22,11 +22,14 @@ This repository contains the following scripts:
 Use this Bibtex to cite this repository
 
 ```
-@misc{DualAQD,
-  doi = {10.48550/ARXIV.2212.06370},  
-  author = {Morales, Giorgio and Sheppard, John W.},  
-  title = {Dual Accuracy-Quality-Driven Neural Network for Prediction Interval Generation},
-  publisher = {arXiv},  
-  year = {2022}
+@ARTICLE{10365540,
+  author={Morales, Giorgio and Sheppard, John W.},
+  journal={IEEE Transactions on Neural Networks and Learning Systems}, 
+  title={Dual Accuracy-Quality-Driven Neural Network for Prediction Interval Generation}, 
+  year={2023},
+  volume={},
+  number={},
+  pages={1-11},
+  doi={10.1109/TNNLS.2023.3339470}
 }
 ```

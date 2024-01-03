@@ -8,8 +8,9 @@ We designed a loss function, [DualAQD](https://arxiv.org/abs/2212.06370), for th
 Both objectives are balanced within the loss function using a self-adaptive coefficient.
 Furthermore, we apply a Monte Carlo-based approach that evaluates the model uncertainty in the learned PIs.
 
-
-<img src=https://raw.githubusercontent.com/GiorgioMorales/PredictionIntervals/master/images/introduction.jpg alt="alt text" width=400 >
+<p align="center">
+  <img src="https://raw.githubusercontent.com/GiorgioMorales/PredictionIntervals/master/images/introduction.jpg" alt="alt text" width="400">
+</p>
 
 ## Usage
 

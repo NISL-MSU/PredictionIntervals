@@ -212,6 +212,7 @@ class NNModel:
         picp, picptr, max_picptr, epoch_max_picptr = 0, 0, 0, 0
         first95 = True  # This is a flag used to check if validation PICP has already reached 95% during the training
         warmup = 10  # Warmup period. Just helps to get rid of inconsistencies faster
+        warmup2 = 50  # Warmup period. Just helps to get rid of inconsistencies faster
         top = 1
         alpha_0 = alpha_
         err_prev, err_new, beta_, beta_prev, d_err = 0, 0, 1, 0, 1
@@ -371,15 +372,17 @@ class NNModel:
                     max_picptr = picptr
                     epoch_max_picptr = epoch
                 else:
-                    if epoch == epoch_max_picptr + 100 and \
+                    if epoch == epoch_max_picptr + 20 and \
                             picptr <= max_picptr:  # If 500 epochs have passed without increasing PICP
                         top = .95
+                        alpha_0 = alpha_0 * 2
 
-                # Beta hyperparameter
-                err_new = top - picptr
-                beta_ = beta_ + alpha_0 * err_new
-                # Update parameters
-                BETA.append(beta_)
+                if epoch > warmup2:
+                    # Beta hyperparameter
+                    err_new = top - picptr
+                    beta_ = beta_ + alpha_0 * err_new
+                    # Update parameters
+                    BETA.append(beta_)
 
             ##################################################
             # Print
@@ -390,7 +393,7 @@ class NNModel:
                     print('VALIDATION: Training_MSE: %.5f. Best_MSE: %.5f' % (msetr, val_mse))
                 else:
                     print('VALIDATION: Training_MSE: %.5f. Best_MSEval: %.5f. MSE val: %.5f. PICP val: %.5f. '
-                          'MPIW val: %.5f' % (msetr, val_mse, mse, picp, width))
+                          'MPIW val: %.5f BestPICP: %.5f BestMPIW: %.5f' % (msetr, val_mse, mse, picp, width, val_picp, val_mpiw))
 
         # Save training metrics
         if filepath is not None:

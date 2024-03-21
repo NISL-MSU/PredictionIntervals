@@ -7,7 +7,7 @@ import numpy as np
 from src import utils
 from tqdm import trange
 from torch import optim
-from src.DualAQD.models.network import *
+from src.PredictionIntervals.models.network import *
 
 
 # import matplotlib.pyplot as plt

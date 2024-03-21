@@ -2,7 +2,7 @@ import torch
 import pickle
 from src.utils import *
 from sklearn.model_selection import KFold
-from src.DualAQD.models.NNModel import NNModel
+from src.PredictionIntervals.models.NNModel import NNModel
 
 
 class Trainer:
@@ -46,9 +46,9 @@ class Trainer:
         """
         # If the temp folder does not exist, create it
         root = get_project_root()
-        folder = os.path.join(root, "src//DualAQD//models//temp_weights")
-        if not os.path.exists(os.path.join(root, "src//DualAQD//models//temp_weights")):
-            os.mkdir(os.path.join(root, "src//DualAQD//models//temp_weights"))
+        folder = os.path.join(root, "src//PredictionIntervals//models//temp_weights")
+        if not os.path.exists(os.path.join(root, "src//PredictionIntervals//models//temp_weights")):
+            os.mkdir(os.path.join(root, "src//PredictionIntervals//models//temp_weights"))
         if not os.path.exists(folder):
             os.mkdir(folder)
 

@@ -7,12 +7,12 @@ import pickle
 import itertools
 import numpy as np
 import matplotlib.pyplot as plt
-from src.DualAQD.models.NNModel import NNModel
+from src.PredictionIntervals.models.NNModel import NNModel
 from sklearn.model_selection import KFold
-from src.DualAQD.Datasets.GenerateDatasets import DataLoader
+from src.PredictionIntervals.Datasets.GenerateDatasets import DataLoader
 from sklearn.model_selection import train_test_split
 # Functions needed for QD+
-from src.DualAQD.models.aggregation_functions import _split_normal_aggregator  # You can comment it if you only want to test DualAQD
+from src.PredictionIntervals.models.aggregation_functions import _split_normal_aggregator  # You can comment it if you only want to test DualAQD
 
 
 class PIGenerator:

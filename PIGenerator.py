@@ -1,23 +1,27 @@
 import os
 import sys
 import time
-import utils
+from src import utils
 import torch
 import pickle
 import itertools
 import numpy as np
 import matplotlib.pyplot as plt
-from models.NNModel import NNModel
+from src.DualAQD.models.NNModel import NNModel
 from sklearn.model_selection import KFold
-from Datasets.GenerateDatasets import DataLoader
+from src.DualAQD.Datasets.GenerateDatasets import DataLoader
 from sklearn.model_selection import train_test_split
 # Functions needed for QD+
-from models.aggregation_functions import _split_normal_aggregator  # You can comment it if you only want to test DualAQD
+from src.DualAQD.models.aggregation_functions import _split_normal_aggregator  # You can comment it if you only want to test DualAQD
 
 
 class PIGenerator:
 
-    def __init__(self, dataset='Boston', method='AQD'):
+    def __init__(self, dataset: str = 'Boston', method: str = 'DualAQD'):
+        """This class is designed specifically for comparison against other PI-generation methods and replicate the
+        results of our paper 'Dual Accuracy-Quality-Driven Neural Network for Prediction Interval Generation'
+        :param dataset: Dataset name
+        :param method: Method name. Options: 'DualAQD', 'MCDropout', 'QD', or 'QD+'"""
 
         self.dataset = dataset
         self.method = method
@@ -177,7 +181,7 @@ class PIGenerator:
         return cvmse, cvmpiw, cvpicp
 
     def calculate_metrics(self, Xval, Yval, maxs, mins, filepath=None):
-        """Calculate metrics using MC-Dropout to measure model uncertainty"""
+        """Calculate metrics using a PI-generation method to quantify uncertainty"""
         startsplit = time.time()
 
         if self.method in ['DualAQD', 'MCDropout']:  # These methods use only one model
@@ -356,7 +360,8 @@ class PIGenerator:
                     print("############################")
                     print('FOLD PERFORMANCE')
                     print("############################")
-                    print("Val MSE: " + str(metrics[3]) + " Val PICP: " + str(metrics[4]) + " Val MPIW: " + str(metrics[5]))
+                    print("Val MSE: " + str(metrics[3]) + " Val PICP: " + str(metrics[4]) + " Val MPIW: " + str(
+                        metrics[5]))
                     # Reset all weights
                     self.model = self.reset_model()
                 ntrain += 1

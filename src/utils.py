@@ -1,5 +1,11 @@
+import os
 import numpy as np
+from pathlib import Path
 import matplotlib.pyplot as plt
+
+
+def get_project_root() -> Path:
+    return Path(__file__).parent.parent
 
 
 def mse(imageA, imageB):

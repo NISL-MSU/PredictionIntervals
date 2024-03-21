@@ -1,12 +1,14 @@
-import sys
-import utils
+import os
+import time
 import torch
 import pickle
 import random
 import numpy as np
+from src import utils
 from tqdm import trange
 from torch import optim
-from models.network import *
+from src.DualAQD.models.network import *
+
 
 # import matplotlib.pyplot as plt
 
@@ -30,18 +32,18 @@ def enable_dropout(model):
             m.train()
 
 
-def DualAQD_objective(y_pred, y_true, beta_, pe):
+def DualAQD_objective(y_pred, y_true, eta_, pe):
     """Proposed DualAQD loss function,
     @param y_pred: NN output (y_u, y_l)
     @param y_true: Ground-truth.
     @param pe: Point estimate (from the base model).
-    @param beta_: Specify the importance of the width factor."""
+    @param eta_: Specify the importance of the width factor."""
     # Separate upper and lower limits
     y_u = y_pred[:, 0]
     y_l = y_pred[:, 1]
     y_o = pe.detach().squeeze(1)
 
-    if beta_ is not None:
+    if eta_ is not None:
         MPIW_p = torch.mean(torch.abs(y_u - y_true) + torch.abs(y_true - y_l))  # Calculate MPIW_penalty
         cs = torch.max(torch.abs(y_o - y_true).detach())
         # DualAQD reported in the paper
@@ -49,7 +51,7 @@ def DualAQD_objective(y_pred, y_true, beta_, pe):
                        torch.exp(torch.mean(-y_true + y_l) + cs))
 
         # Calculate loss
-        Loss_S = MPIW_p + Constraints * beta_
+        Loss_S = MPIW_p + Constraints * eta_
     else:  # During the first epochs, the lower and upper bounds are trained to match the output of the first NN
         MPIW_p = torch.mean(torch.abs(y_u - y_o) + torch.abs(y_o - y_l))  # Calculate MPIW_penalty
         Loss_S = MPIW_p
@@ -149,9 +151,32 @@ def QD_objective(y_pred, y_true, soften_=1, alpha_=0.05, beta_=0.03, device='cud
 
 
 #######################################################################################################################
-# Class Definitions
+# Early Stopping
 #######################################################################################################################
 
+class EarlyStopping:
+    def __init__(self, tolerance=30, min_delta=7):
+
+        self.tolerance = tolerance
+        self.min_delta = min_delta
+        self.counter = 0
+        self.early_stop = False
+
+    def __call__(self, train_rmse, validation_rmse, improved):
+        """If the validation error is greater than the training error by self.min_delta during the last self.tolerance
+        epochs, stop. If during the process, the validation error improved, re-start counter"""
+        if improved:
+            self.counter = 0
+        else:
+            if (validation_rmse - train_rmse) > self.min_delta:
+                self.counter += 1
+                if self.counter >= self.tolerance:
+                    self.early_stop = True
+
+
+#######################################################################################################################
+# Class Definitions
+#######################################################################################################################
 class NNObject:
     """Helper class used to store the main information of a NN model."""
 
@@ -197,6 +222,8 @@ class NNModel:
         # Otherwise, QD+ and QD need to generate different NNs each time in order to create a diverse ensemble
 
         # Prepare list of indexes for shuffling
+        if Xtrain.ndim == 1:
+            Xtrain, Xval = Xtrain[:, None], Xval[:, None]
         indexes = np.arange(len(Xtrain))
         np.random.shuffle(indexes)
         Xtrain = Xtrain[indexes]
@@ -217,18 +244,24 @@ class NNModel:
         alpha_0 = alpha_
         err_prev, err_new, beta_, beta_prev, d_err = 0, 0, 1, 0, 1
 
-        ##################################################
-        # If model AQD, start with the pre-trained network
-        ##################################################
-        if self.method in ['DualAQD']:
+        ##############################################################
+        # If the method is DualAQD, start training the base network
+        ##############################################################
+        if self.method == 'DualAQD':
             self.basemodel = NNModel(self.device, self.nfeatures, 'MCDropout')
-            filepathbase = filepath.replace('DualAQD', 'MCDropout')
-            if 'TuningResults' in filepathbase:
-                filepathbase = filepathbase.replace('TuningResults', 'CVResults')
-            try:
-                self.basemodel.loadModel(filepathbase)
-            except FileNotFoundError:
-                sys.exit("The 'MCDropout' method needs be run first. It will generate the target-estimation NN 'f'")
+            dir_basemodel = os.path.dirname(filepath)
+            file_basename = os.path.basename(filepath).replace('DualAQD', 'MCDropout')
+            filepath_base = os.path.join(dir_basemodel, file_basename)
+            if os.path.exists(filepath_base):
+                self.basemodel.loadModel(filepath_base)
+            else:
+                print("Training base model...")
+                self.basemodel.trainFold(Xtrain.copy(), Ytrain.copy(), Xval.copy(), Yval.copy(), batch_size, epochs,
+                                         filepath_base, False, yscale, alpha_)
+            print("Base model training complete!")
+            time.sleep(0.1)
+
+            # Copy weights to initialize Hyper3DNetAQD model
             for target_param, param in zip(self.model.network.named_parameters(),
                                            self.basemodel.model.network.named_parameters()):
                 if 'out' not in target_param[0]:
@@ -266,9 +299,9 @@ class NNModel:
                 if self.method == 'DualAQD':
                     point_estimates = self.basemodel.model.network(Xtrainb)
                     if epoch > warmup:
-                        loss = DualAQD_objective(outputs, Ytrainb, beta_=beta_, pe=point_estimates)
+                        loss = DualAQD_objective(outputs, Ytrainb, eta_=beta_, pe=point_estimates)
                     else:  # During the warmup period the objective is that \hat{y}^u = \hat{y}^l = \hat{y}
-                        loss = DualAQD_objective(outputs, Ytrainb, beta_=None, pe=point_estimates)
+                        loss = DualAQD_objective(outputs, Ytrainb, eta_=None, pe=point_estimates)
                 elif self.method == 'QD':
                     loss = QD_objective(outputs, Ytrainb, device=self.device, beta_=alpha_)
                 elif self.method == 'QD+':
@@ -419,7 +452,7 @@ class NNModel:
         # plt.legend(loc="upper right")
         return MPIW, PICP, MSE, val_mse, val_picp, val_mpiw
 
-    def evaluateFold(self, valxn, maxs, mins, batch_size):
+    def evaluateFold(self, valxn, maxs=None, mins=None, batch_size=96):
         """Retrieve point predictions."""
         if maxs is not None and mins is not None:
             valxn = utils.reverseMinMaxScale(valxn, maxs, mins)

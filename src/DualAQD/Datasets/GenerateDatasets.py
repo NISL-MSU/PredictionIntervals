@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-from utils import create_synth_data
+from src.utils import create_synth_data
 
 
 class DataLoader:

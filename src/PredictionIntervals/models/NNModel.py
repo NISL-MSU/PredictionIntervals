@@ -4,9 +4,10 @@ import torch
 import pickle
 import random
 import numpy as np
-from src.PredictionIntervals import utils
 from tqdm import trange
 from torch import optim
+import matplotlib.pyplot as plt
+from src.PredictionIntervals import utils
 from src.PredictionIntervals.models.network import *
 
 
@@ -211,7 +212,8 @@ class NNModel:
 
         self.model = NNObject(network, criterion, optimizer)
 
-    def trainFold(self, Xtrain, Ytrain, Xval, Yval, batch_size, epochs, filepath, printProcess, yscale, alpha_=0.01):
+    def trainFold(self, Xtrain, Ytrain, Xval, Yval, batch_size, epochs, filepath, printProcess, yscale,
+                  alpha_=0.01, plot_curves=False):
         if self.method in ['AQD', 'MCDropout']:  # Initialize seed to get reproducible results when using these methods
             np.random.seed(7)
             random.seed(7)
@@ -441,15 +443,16 @@ class NNModel:
                 np.save(filepath + '_historyMPIW', MPIW)
                 np.save(filepath + '_historyPICP', PICP)
 
-        # plt.figure()
-        # plt.plot(MPIWtr, label=r'$MPIW_{training}$')
-        # plt.plot(MPIW, label=r'$MPIW_{validation}$')
-        # plt.legend(loc="upper right")
-        # plt.figure()
-        # plt.plot(PICPtr, label=r'$PICP_{training}$')
-        # plt.plot(PICP, label=r'$PICP_{validation}$')
-        # plt.plot(BETA, label=r'$\beta$')
-        # plt.legend(loc="upper right")
+        if plot_curves:
+            plt.figure()
+            plt.plot(MPIWtr, label=r'$MPIW_{training}$')
+            plt.plot(MPIW, label=r'$MPIW_{validation}$')
+            plt.legend(loc="upper right")
+            plt.figure()
+            plt.plot(PICPtr, label=r'$PICP_{training}$')
+            plt.plot(PICP, label=r'$PICP_{validation}$')
+            plt.plot(BETA, label=r'$\beta$')
+            plt.legend(loc="upper right")
         return MPIW, PICP, MSE, val_mse, val_picp, val_mpiw
 
     def evaluateFold(self, valxn, maxs=None, mins=None, batch_size=96):

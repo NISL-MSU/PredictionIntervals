@@ -25,7 +25,7 @@ class Trainer:
         # Configure model
         self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
         self.model = self.reset_model()
-        self.f = None
+        self.f = self._set_folder()
 
         # Normalization
         self.normData = normData
@@ -42,6 +42,15 @@ class Trainer:
     def reset_model(self):
         return NNModel(device=self.device, nfeatures=self.n_features, method=self.method)
 
+    def _set_folder(self):
+        root = get_project_root()
+        folder = os.path.join(root, "PredictionIntervals//models//temp_weights")
+        if not os.path.exists(os.path.join(root, "PredictionIntervals//models//temp_weights")):
+            os.mkdir(os.path.join(root, "PredictionIntervals//models//temp_weights"))
+        if not os.path.exists(folder):
+            os.mkdir(folder)
+        return folder + "//weights-NN-" + self.name
+
     def train(self, batch_size=16, epochs=1000, eta_=0.01, printProcess=False):
         """Train method
         :param batch_size: Mini batch size. It is recommended a small number, like 16
@@ -49,16 +58,6 @@ class Trainer:
         :param eta_: Scale factor used to update the self-adaptive coefficient lambda (Eq. 6 of the paper)
         :param printProcess: If True, print the training process (loss and validation metrics after each epoch)
         """
-        # If the temp folder does not exist, create it
-        root = get_project_root()
-        folder = os.path.join(root, "PredictionIntervals//models//temp_weights")
-        if not os.path.exists(os.path.join(root, "PredictionIntervals//models//temp_weights")):
-            os.mkdir(os.path.join(root, "PredictionIntervals//models//temp_weights"))
-        if not os.path.exists(folder):
-            os.mkdir(folder)
-
-        # Train the model using the current training-validation split
-        self.f = folder + "//weights-NN-" + self.name
         _, _, _, val_mse, PICP, MPIW = self.model.trainFold(Xtrain=self.X, Ytrain=self.Y, Xval=self.Xval, Yval=self.Yval,
                                                             batch_size=batch_size, epochs=epochs, filepath=self.f,
                                                             printProcess=printProcess, alpha_=eta_,
@@ -135,7 +134,11 @@ if __name__ == '__main__':
     Xin, Yin, _, _ = create_synth_data(n=1000, plot=False)
     indices = np.arange(len(Yin))
     np.random.shuffle(indices)
-    Xtrain, Ytrain = Xin[indices[:int(len(Yin) / 2)]], Yin[indices[:int(len(Yin) / 2)]]
-    xval, yval = Xin[indices[int(len(Yin) / 2):]], Yin[indices[int(len(Yin) / 2):]]
+    Xtrain, Ytrain = Xin[indices[:int(len(Yin) / 3)]], Yin[indices[:int(len(Yin) / 3)]]
+    xval, yval = Xin[indices[int(len(Yin) / 3):int(len(Yin) / 3 * 2)]], Yin[indices[int(len(Yin) / 3):int(len(Yin) / 3 * 2)]]
+    xtest, ytest = Xin[indices[int(len(Yin) / 3 * 2):]], Yin[indices[int(len(Yin) / 3 * 2):]]
+
     trainer = Trainer(Xtrain, Ytrain, xval, yval)
     trainer.train(printProcess=False, epochs=1000)
+
+    mset, PICPt, MPIWt, ypredt, y_uT, y_lT = trainer.evaluate(xtest, ytest, normData=True)

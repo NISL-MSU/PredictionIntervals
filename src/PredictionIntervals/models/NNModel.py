@@ -485,6 +485,9 @@ class NNModel:
         if maxs is not None and mins is not None:
             valxn = reverseMinMaxScale(valxn, maxs, mins)
 
+        if valxn.ndim == 1:
+            valxn = valxn[:, None]
+
         with torch.no_grad():
             preds_MC = np.zeros((len(valxn), MC_samples))
             if self.method in ["DualAQD", "QD", "QD+"]:

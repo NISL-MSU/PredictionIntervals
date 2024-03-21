@@ -1,7 +1,7 @@
 import torch
 import pickle
-from src.PredictionIntervals.utils import *
-from src.PredictionIntervals.models.NNModel import NNModel
+from ..utils import *
+from ..models.NNModel import NNModel
 
 
 class Trainer:
@@ -42,7 +42,7 @@ class Trainer:
     def reset_model(self):
         return NNModel(device=self.device, nfeatures=self.n_features, method=self.method)
 
-    def train(self, batch_size=16, epochs=500, eta_=0.01, printProcess=False):
+    def train(self, batch_size=16, epochs=1000, eta_=0.01, printProcess=False):
         """Train method
         :param batch_size: Mini batch size. It is recommended a small number, like 16
         :param epochs: Number of training epochs

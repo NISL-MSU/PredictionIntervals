@@ -1,17 +1,12 @@
-import os
 import time
 import torch
 import pickle
 import random
-import numpy as np
 from tqdm import trange
 from torch import optim
-import matplotlib.pyplot as plt
-from src.PredictionIntervals import utils
-from src.PredictionIntervals.models.network import *
+from ..utils import *
+from .network import *
 
-
-# import matplotlib.pyplot as plt
 
 np.random.seed(7)  # Initialize seed to get reproducible results
 random.seed(7)
@@ -332,26 +327,26 @@ class NNModel:
                     ypredtr = self.model.network(torch.from_numpy(Xtrain).float().to(self.device)).cpu().numpy()
                     ypred = self.model.network(torch.from_numpy(Xval).float().to(self.device)).cpu().numpy()
                 # Reverse normalization
-                Ytrain_original = utils.reverseMinMaxScale(Ytrain, yscale[0], yscale[1])
-                Yval_original = utils.reverseMinMaxScale(Yval, yscale[0], yscale[1])
-                ypredtr = utils.reverseMinMaxScale(ypredtr, yscale[0], yscale[1])
-                ypred = utils.reverseMinMaxScale(ypred, yscale[0], yscale[1])
+                Ytrain_original = reverseMinMaxScale(Ytrain, yscale[0], yscale[1])
+                Yval_original = reverseMinMaxScale(Yval, yscale[0], yscale[1])
+                ypredtr = reverseMinMaxScale(ypredtr, yscale[0], yscale[1])
+                ypred = reverseMinMaxScale(ypred, yscale[0], yscale[1])
 
                 ##################################################
                 # Calculate metrics
                 ##################################################
                 # Calculate MSE
                 if self.method in ['DualAQD', 'QD+']:
-                    msetr = utils.mse(Ytrain_original, ypredtr[:, 2])
-                    mse = utils.mse(Yval_original, ypred[:, 2])
+                    msetr = mse(Ytrain_original, ypredtr[:, 2])
+                    mseval = mse(Yval_original, ypred[:, 2])
                 elif self.method == 'QD':
-                    msetr = utils.mse(Ytrain_original, (ypredtr[:, 0] + ypredtr[:, 1]) / 2)
-                    mse = utils.mse(Yval_original, (ypred[:, 0] + ypred[:, 1]) / 2)
+                    msetr = mse(Ytrain_original, (ypredtr[:, 0] + ypredtr[:, 1]) / 2)
+                    mseval = mse(Yval_original, (ypred[:, 0] + ypred[:, 1]) / 2)
                 else:
-                    msetr = utils.mse(Ytrain_original, ypredtr)
-                    mse = utils.mse(Yval_original, ypred)
+                    msetr = mse(Ytrain_original, ypredtr)
+                    mseval = mse(Yval_original, ypred)
                 MSEtr.append(msetr)
-                MSE.append(mse)
+                MSE.append(mseval)
                 if self.method in ['DualAQD', 'QD', 'QD+']:
                     # Calculate MPIW and PICP
                     y_true = torch.from_numpy(Ytrain_original).float().to(self.device)
@@ -387,14 +382,14 @@ class NNModel:
                         (picp >= 0.9499 and first95) or (picp >= 0.9499 and width < val_mpiw and not first95):
                     if picp >= .9499:
                         first95 = False
-                    val_mse = mse
+                    val_mse = mseval
                     val_picp = picp
                     val_mpiw = width
                     if filepath is not None:
                         torch.save(self.model.network.state_dict(), filepath)
             else:  # Save model if MSE decreases
-                if mse < val_mse:
-                    val_mse = mse
+                if mseval < val_mse:
+                    val_mse = mseval
                     if filepath is not None:
                         torch.save(self.model.network.state_dict(), filepath)
 
@@ -428,7 +423,7 @@ class NNModel:
                     print('VALIDATION: Training_MSE: %.5f. Best_MSE: %.5f' % (msetr, val_mse))
                 else:
                     print('VALIDATION: Training_MSE: %.5f. Best_MSEval: %.5f. MSE val: %.5f. PICP val: %.5f. '
-                          'MPIW val: %.5f BestPICP: %.5f BestMPIW: %.5f' % (msetr, val_mse, mse, picp, width, val_picp, val_mpiw))
+                          'MPIW val: %.5f BestPICP: %.5f BestMPIW: %.5f' % (msetr, val_mse, mseval, picp, width, val_picp, val_mpiw))
 
         # Save training metrics
         if filepath is not None:
@@ -458,7 +453,7 @@ class NNModel:
     def evaluateFold(self, valxn, maxs=None, mins=None, batch_size=96):
         """Retrieve point predictions."""
         if maxs is not None and mins is not None:
-            valxn = utils.reverseMinMaxScale(valxn, maxs, mins)
+            valxn = reverseMinMaxScale(valxn, maxs, mins)
 
         ypred = []
         with torch.no_grad():
@@ -488,7 +483,7 @@ class NNModel:
         torch.backends.cudnn.deterministic = True
         torch.backends.cudnn.benchmark = False
         if maxs is not None and mins is not None:
-            valxn = utils.reverseMinMaxScale(valxn, maxs, mins)
+            valxn = reverseMinMaxScale(valxn, maxs, mins)
 
         with torch.no_grad():
             preds_MC = np.zeros((len(valxn), MC_samples))

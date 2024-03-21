@@ -71,13 +71,14 @@ class Trainer:
 
     def _apply_normalization(self, Xeval, Yeval):
         Xeval = applynormalize(Xeval, self.means, self.stds)
-        Yeval = applyMinMaxScale(Yeval, self.maxs, self.mins)
+        if Yeval is not None:
+            Yeval = applyMinMaxScale(Yeval, self.maxs, self.mins)
         return Xeval, Yeval
 
-    def evaluate(self, Xeval, Yeval, normData: bool = False):
+    def evaluate(self, Xeval, Yeval=None, normData: bool = False):
         """Calculate metrics using a PI-generation method to quantify uncertainty
         :param Xeval: Evaluation data
-        :param Yeval : Evaluation targets
+        :param Yeval : Optional. Evaluation targets
         :param normData: If True, apply the same normalization that was applied to the training set
         """
         if normData:
@@ -108,23 +109,25 @@ class Trainer:
             y_u = ypred + 1.96 * np.sqrt(model_uncertainty ** 2 + val_MSE)
             y_l = ypred - 1.96 * np.sqrt(model_uncertainty ** 2 + val_MSE)
 
-        # Reverse normalization process
-        Yval = reverseMinMaxScale(Yeval, self.maxs, self.mins)
-        # Calculate MSE
-        val_mse = mse(Yval, ypred)
-        # Calculate the coverage vector
-        y_true = torch.from_numpy(Yval).float().to(self.device)
-        y_ut = torch.from_numpy(y_u).float().to(self.device)
-        y_lt = torch.from_numpy(y_l).float().to(self.device)
-        K_U = torch.max(torch.zeros(y_true.size()).to(self.device), torch.sign(y_ut - y_true))
-        K_L = torch.max(torch.zeros(y_true.size()).to(self.device), torch.sign(y_true - y_lt))
-        K = torch.mul(K_U, K_L)
-        # Calculate MPIW
-        MPIW = torch.mean(y_ut - y_lt).item()
-        # Calculate PICP
-        PICP = torch.mean(K).item()
-
-        return [val_mse, PICP, MPIW, ypred, y_u, y_l]
+        if Yeval is not None:
+            # Reverse normalization process
+            Yeval = reverseMinMaxScale(Yeval, self.maxs, self.mins)
+            # Calculate MSE
+            val_mse = mse(Yeval, ypred)
+            # Calculate the coverage vector
+            y_true = torch.from_numpy(Yeval).float().to(self.device)
+            y_ut = torch.from_numpy(y_u).float().to(self.device)
+            y_lt = torch.from_numpy(y_l).float().to(self.device)
+            K_U = torch.max(torch.zeros(y_true.size()).to(self.device), torch.sign(y_ut - y_true))
+            K_L = torch.max(torch.zeros(y_true.size()).to(self.device), torch.sign(y_true - y_lt))
+            K = torch.mul(K_U, K_L)
+            # Calculate MPIW
+            MPIW = torch.mean(y_ut - y_lt).item()
+            # Calculate PICP
+            PICP = torch.mean(K).item()
+            return [val_mse, PICP, MPIW, ypred, y_u, y_l]
+        else:  # If the targets of the evaluation data are not known, just return predictions
+            return ypred, y_u, y_l
 
 
 if __name__ == '__main__':

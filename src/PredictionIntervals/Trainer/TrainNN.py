@@ -1,6 +1,6 @@
 import torch
 import pickle
-from src.utils import *
+from src.PredictionIntervals.utils import *
 from sklearn.model_selection import KFold
 from src.PredictionIntervals.models.NNModel import NNModel
 

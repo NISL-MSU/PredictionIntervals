@@ -4,7 +4,7 @@ import torch
 import pickle
 import random
 import numpy as np
-from src import utils
+from src.PredictionIntervals import utils
 from tqdm import trange
 from torch import optim
 from src.PredictionIntervals.models.network import *

@@ -1,7 +1,7 @@
 import os
 import sys
 import time
-from src import utils
+from src.PredictionIntervals import utils
 import torch
 import pickle
 import itertools

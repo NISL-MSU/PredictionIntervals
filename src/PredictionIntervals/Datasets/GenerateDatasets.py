@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-from src.utils import create_synth_data
+from src.PredictionIntervals.utils import create_synth_data
 
 
 class DataLoader:

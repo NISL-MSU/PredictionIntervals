@@ -28,6 +28,40 @@ You can also try the package on [Google Colab](https://colab.research.google.com
 
 ## Usage
 
+### Train the models
+
+DualAQD uses two neural networks: a target-estimation network $f$ that is trained to generate accurate estimates, and a PI-generation NN $g$ that produces the upper and lower bounds of a prediction interval.
+
+First, create an instance of the class `PredictionIntervalsTrainer.`
+
+**Parameters**:
+
+*   `X`: Input data (explainable variables). 2-D numpy array, shape (#samples, #features)
+*   `Y`: Target data (response variable). 1-D numpy array, shape (#samples, #features)
+*   `Xval`: Validation input data. 2-D numpy array, shape (#samples, #features)
+*   `Yval`: Validation target data. 1-D numpy array, shape (#samples, #features)
+*   `method`: PI-generation method. Options: 'DualAQD' or '[MCDropout](https://arxiv.org/pdf/1709.01907.pdf)'
+*   `normData`: If True, apply z-score normalization to the inputs and min-max normalization to the outputs
+
+**Note**: Normalization is applied to the training set; then, the exact same scaling is applied to the validation set.
+
+```python
+from PredictionIntervals.Trainer.TrainNN import Trainer
+trainer = Trainer(X=Xtrain, Y=Ytrain, Xval=Xval, Yval=Yval)
+```
+
+To train the model, we'll call the `train` method.
+
+**Parameters**:
+
+*   `batch_size`: Mini batch size. It is recommended a small number. *default: 16*
+*   `epochs`: Number of training epochs *default: 1000*
+*   `eta_`: Scale factor used to update the self-adaptive coefficient lambda (Eq. 6 of the paper). *default: 0.01*
+*   `printProcess`: If True, print the training process (loss and validation metrics after each epoch). *default: False*
+*   `plotCurves`: If True, plot the training and validation curves at the end of the training process
+
+## Repository Structure
+
 This repository contains the following scripts:
 
 * `PIGenerator.py`: Contains the PIGenerator class that is used to perform cross-validation using different NN-based PI-generation methods.        
@@ -35,6 +69,32 @@ This repository contains the following scripts:
 * `models/NNmodel.py`: Implements the PI-generation methods tested in this work: DualAQD, QD+, QD, MC-Dropout.
 * `models/network.py`: Defines the network architecture.
 * `Demo.ipynb`: Jupyter notebook demo using a synthetic dataset.
+
+```python
+trainer.train(printProcess=False, epochs=2000, batch_size=16, plotCurves=True)
+```
+
+### Evaluate the model on the test set
+
+To do this, we call the method `evaluate`.
+
+**Parameters**:
+
+*   `Xeval`: Evaluation data
+*   `Yeval`: Optional. Evaluation targets. *default: None*
+*   `normData`: If True, apply the same normalization that was applied to the training set
+
+**Note**: `Yeval` is *None* in the case that the target values of the evaluation data are not known.
+
+**Returns**:
+*   If `Yeval` is *None*: It returns predictions `ypred, y_u, y_l` (i.e., target predictions, PI upper bounds, and PI lower bounds).
+*   If `Yeval` is not *None*: It returns performance metrics and predictions `mse, PICP, MPIW, ypred, y_u, y_l` (i.e., mean square error of target predictions, PI coverage probability, mean PI width, target predictions, PI upper bounds, and PI lower bounds).
+
+```python
+val_mse, PICP, MPIW, ypred, y_u, y_l = trainer.evaluate(Xtest, Ytest, normData=True)
+print('Test Performance:')
+print("Test MSE: " + str(val_mse) + " Test PICP: " + str(PICP) + " Test MPIW: " + str(MPIW))
+```
 
 # Citation
 Use this Bibtex to cite this repository

@@ -60,16 +60,6 @@ To train the model, we'll call the `train` method.
 *   `printProcess`: If True, print the training process (loss and validation metrics after each epoch). *default: False*
 *   `plotCurves`: If True, plot the training and validation curves at the end of the training process
 
-## Repository Structure
-
-This repository contains the following scripts:
-
-* `PIGenerator.py`: Contains the PIGenerator class that is used to perform cross-validation using different NN-based PI-generation methods.        
-* `utils.py`: Additional methods used to transform the data and calculate the metrics. 
-* `models/NNmodel.py`: Implements the PI-generation methods tested in this work: DualAQD, QD+, QD, MC-Dropout.
-* `models/network.py`: Defines the network architecture.
-* `Demo.ipynb`: Jupyter notebook demo using a synthetic dataset.
-
 ```python
 trainer.train(printProcess=False, epochs=2000, batch_size=16, plotCurves=True)
 ```
@@ -95,6 +85,18 @@ val_mse, PICP, MPIW, ypred, y_u, y_l = trainer.evaluate(Xtest, Ytest, normData=T
 print('Test Performance:')
 print("Test MSE: " + str(val_mse) + " Test PICP: " + str(PICP) + " Test MPIW: " + str(MPIW))
 ```
+
+## Repository Structure
+
+This repository contains the following scripts in `src/PredictionIntervals/`:
+
+* `TrainNN.py`: Main method, used to train a PI-generation NN using DualAQD or MCDropout-PI.
+* `PIGenerator.py`: Performs cross-validation using different NN-based PI-generation methods. Used for replication of the paper results.        
+* `utils.py`: Additional methods used to transform the data and calculate the metrics.
+* `utils.py`: Additional methods used to transform the data and calculate the metrics. 
+* `models/NNmodel.py`: Implements the PI-generation methods tested in this work: DualAQD, QD+, QD, MC-Dropout.
+* `models/network.py`: Defines the network architecture.
+* `Demo.ipynb`: Jupyter notebook demo using a synthetic dataset.
 
 # Citation
 Use this Bibtex to cite this repository

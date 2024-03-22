@@ -1,4 +1,6 @@
 import time
+
+import matplotlib.pyplot as plt
 import torch
 import pickle
 import random
@@ -463,15 +465,20 @@ class NNModel:
                 plt.plot(MPIWtr, label=r'$MPIW_{training}$')
                 plt.plot(MPIW, label=r'$MPIW_{validation}$')
                 plt.legend(loc="upper right")
+                plt.title("Learning Curve - Mean PI Width")
+                plt.tight_layout()
                 plt.figure(figsize=(4, 3))
                 plt.plot(PICPtr, label=r'$PICP_{training}$')
                 plt.plot(PICP, label=r'$PICP_{validation}$')
-                plt.plot(BETA, label=r'$\beta$')
+                plt.plot(BETA, label=r'$\lambda$')
+                plt.title("Learning Curve - PI Coverage Probability")
                 plt.legend(loc="upper right")
+                plt.tight_layout()
             else:
                 plt.figure(figsize=(4, 3))
                 plt.plot(MSEtr, label=r'$MSE_{training}$')
                 plt.plot(MSE, label=r'$MSE_{validation}$')
+                plt.title("Learning Curve - MSE")
 
         return MPIW, PICP, MSE, val_mse, val_picp, val_mpiw
 

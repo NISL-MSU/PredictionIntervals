@@ -22,7 +22,6 @@ The following libraries have to be installed:
 * [Pytorch](https://pytorch.org/)
 
 To install the package, run `!pip install -q git+https://github.com/NISL-MSU/PredictionIntervals` in the terminal. 
-This will also install additional packages such as pymoo, sklearn, and tensorboard.
 
 You can also try the package on [Google Colab](https://colab.research.google.com/github/NISL-MSU/PredictionIntervals/blob/master/DualAQD_PredictionIntervals.ipynb).
 

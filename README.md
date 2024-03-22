@@ -1,4 +1,5 @@
 [![arXiv](https://img.shields.io/badge/arXiv-2212.06370-b31b1b.svg)](https://arxiv.org/abs/2212.06370)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/weiji14/deepbedmap/)
 
 # DualAQD: Dual Accuracy-quality-driven Prediction Intervals
 
@@ -13,6 +14,16 @@ Furthermore, we apply a Monte Carlo-based approach that evaluates the model unce
 <p align="center">
   <img src="https://raw.githubusercontent.com/GiorgioMorales/PredictionIntervals/master/images/introduction.jpg" alt="alt text" width="400">
 </p>
+
+## Installation
+
+The following libraries have to be installed:
+* [Git](https://git-scm.com/download/) 
+* [Pytorch](https://pytorch.org/)
+
+To install the package, run `!pip install -q git+https://github.com/NISL-MSU/PredictionIntervals` in the terminal (this option will be available after the paper acceptance). 
+This will also install additional packages such as pymoo, sklearn, and tensorboard.
+
 
 ## Usage
 

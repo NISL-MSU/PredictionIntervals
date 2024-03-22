@@ -51,21 +51,22 @@ class Trainer:
             os.mkdir(folder)
         return folder + "//weights-NN-" + self.name
 
-    def train(self, batch_size=16, epochs=1000, eta_=0.01, printProcess=False):
+    def train(self, batch_size=16, epochs=1000, eta_=0.01, printProcess=False, plotCurves=False):
         """Train method
         :param batch_size: Mini batch size. It is recommended a small number, like 16
         :param epochs: Number of training epochs
         :param eta_: Scale factor used to update the self-adaptive coefficient lambda (Eq. 6 of the paper)
         :param printProcess: If True, print the training process (loss and validation metrics after each epoch)
+        :param plotCurves: If True, plot the training and validation curves at the end of the training process
         """
         _, _, _, val_mse, PICP, MPIW = self.model.trainFold(Xtrain=self.X, Ytrain=self.Y, Xval=self.Xval, Yval=self.Yval,
                                                             batch_size=batch_size, epochs=epochs, filepath=self.f,
                                                             printProcess=printProcess, alpha_=eta_,
-                                                            yscale=[self.maxs, self.mins])
+                                                            yscale=[self.maxs, self.mins], plot_curves=plotCurves)
         # Run the model over the validation set 'MC-samples' times and Calculate PIs and metrics
         if self.method not in ['DualAQD']:  # DualAQD already performs validation and aggregation in "trainFold"
             [val_mse, PICP, MPIW, _, _, _] = self.evaluate(self.Xval, self.Yval)
-        print('PERFORMANCE AFTER AGGREGATION:')
+        print('\nValidation performance:')
         print("Val MSE: " + str(val_mse) + " Val PICP: " + str(PICP) + " Val MPIW: " + str(MPIW))
 
     def _apply_normalization(self, Xeval, Yeval):

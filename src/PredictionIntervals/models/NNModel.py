@@ -151,7 +151,7 @@ def QD_objective(y_pred, y_true, soften_=1, alpha_=0.05, beta_=0.03, device='cud
 #######################################################################################################################
 
 class EarlyStopping:
-    def __init__(self, tolerance=30, min_delta=7):
+    def __init__(self, tolerance=500, min_delta: float = 1):
 
         self.tolerance = tolerance
         self.min_delta = min_delta
@@ -240,6 +240,7 @@ class NNModel:
         top = 1
         alpha_0 = alpha_
         err_prev, err_new, beta_, beta_prev, d_err = 0, 0, 1, 0, 1
+        early_stopping = EarlyStopping(min_delta=1e-6)
 
         ##############################################################
         # If the method is DualAQD, start training the base network
@@ -249,12 +250,12 @@ class NNModel:
             dir_basemodel = os.path.dirname(filepath)
             file_basename = os.path.basename(filepath).replace('DualAQD', 'MCDropout')
             filepath_base = os.path.join(dir_basemodel, file_basename)
-            if os.path.exists(filepath_base):
-                self.basemodel.loadModel(filepath_base)
-            else:
-                print("Training base model...")
-                self.basemodel.trainFold(Xtrain.copy(), Ytrain.copy(), Xval.copy(), Yval.copy(), batch_size, epochs,
-                                         filepath_base, False, yscale, alpha_)
+            # if os.path.exists(filepath_base):
+            #     self.basemodel.loadModel(filepath_base)
+            # else:
+            print("Training base model...")
+            self.basemodel.trainFold(Xtrain.copy(), Ytrain.copy(), Xval.copy(), Yval.copy(), batch_size, epochs,
+                                     filepath_base, False, yscale, alpha_, False)
             print("Base model training complete!")
             time.sleep(0.1)
 
@@ -267,6 +268,7 @@ class NNModel:
         ##################################################
         # Start training
         ##################################################
+        cnt = 0
         for epoch in trange(epochs):  # Epoch loop
             # Batch sorting
             if epoch > warmup and (self.method in ['DualAQD', 'QD', 'QD+']):
@@ -376,6 +378,7 @@ class NNModel:
             # Save model if there's improvement
             ##################################################
             # Save model if PICP increases
+            improved = False  # Flag that is true if validation error improved
             if self.method in ['DualAQD', 'QD+', 'QD']:
                 # Criteria 1: If <95, choose max picp, if picp>95, choose any picp if width<minimum width
                 if (((val_picp == picp < .95 and width < val_mpiw) or (val_picp < picp < .95)) and first95) or \
@@ -386,10 +389,12 @@ class NNModel:
                     val_picp = picp
                     val_mpiw = width
                     if filepath is not None:
+                        improved = True
                         torch.save(self.model.network.state_dict(), filepath)
             else:  # Save model if MSE decreases
                 if mseval < val_mse:
                     val_mse = mseval
+                    improved = True
                     if filepath is not None:
                         torch.save(self.model.network.state_dict(), filepath)
 
@@ -425,6 +430,20 @@ class NNModel:
                     print('VALIDATION: Training_MSE: %.5f. Best_MSEval: %.5f. MSE val: %.5f. PICP val: %.5f. '
                           'MPIW val: %.5f BestPICP: %.5f BestMPIW: %.5f' % (msetr, val_mse, mseval, picp, width, val_picp, val_mpiw))
 
+            if self.method == 'MCDropout':  # Use early stopping based on the RMSE
+                early_stopping(msetr ** .5, mseval ** .5, improved)
+                if early_stopping.early_stop:
+                    print("Early stopping at epoch: ", epoch)
+                    break
+            elif self.method == 'DualAQD' and epoch > 1000:
+                if not improved:
+                    cnt += 1
+                    if cnt == 200:
+                        print("Early stopping at epoch: ", epoch)
+                        break
+                else:
+                    cnt = 0
+
         # Save training metrics
         if filepath is not None:
             with open(filepath + '_validationMSE', 'wb') as fil:
@@ -439,15 +458,21 @@ class NNModel:
                 np.save(filepath + '_historyPICP', PICP)
 
         if plot_curves:
-            plt.figure()
-            plt.plot(MPIWtr, label=r'$MPIW_{training}$')
-            plt.plot(MPIW, label=r'$MPIW_{validation}$')
-            plt.legend(loc="upper right")
-            plt.figure()
-            plt.plot(PICPtr, label=r'$PICP_{training}$')
-            plt.plot(PICP, label=r'$PICP_{validation}$')
-            plt.plot(BETA, label=r'$\beta$')
-            plt.legend(loc="upper right")
+            if self.method in ['DualAQD', 'QD+', 'QD']:
+                plt.figure(figsize=(4, 3))
+                plt.plot(MPIWtr, label=r'$MPIW_{training}$')
+                plt.plot(MPIW, label=r'$MPIW_{validation}$')
+                plt.legend(loc="upper right")
+                plt.figure(figsize=(4, 3))
+                plt.plot(PICPtr, label=r'$PICP_{training}$')
+                plt.plot(PICP, label=r'$PICP_{validation}$')
+                plt.plot(BETA, label=r'$\beta$')
+                plt.legend(loc="upper right")
+            else:
+                plt.figure(figsize=(4, 3))
+                plt.plot(MSEtr, label=r'$MSE_{training}$')
+                plt.plot(MSE, label=r'$MSE_{validation}$')
+
         return MPIW, PICP, MSE, val_mse, val_picp, val_mpiw
 
     def evaluateFold(self, valxn, maxs=None, mins=None, batch_size=96):

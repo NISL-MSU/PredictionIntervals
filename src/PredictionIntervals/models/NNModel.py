@@ -472,7 +472,7 @@ class NNModel:
                 plt.plot(PICP, label=r'$PICP_{validation}$')
                 plt.plot(BETA, label=r'$\lambda$')
                 plt.title("Learning Curve - PI Coverage Probability")
-                plt.legend(loc="upper right")
+                plt.legend(loc="lower right")
                 plt.tight_layout()
             else:
                 plt.figure(figsize=(4, 3))

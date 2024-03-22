@@ -1,182 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7003795d-4b7d-4b5b-b853-031efc69fe50" name="Default Changelist" comment="Initial commit">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Datasets/GenerateDatasets.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Datasets/protein_data.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sshConfigs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sshConfigs.xml" afterDir="false" />
+    <list default="true" id="7003795d-4b7d-4b5b-b853-031efc69fe50" name="Default Changelist" comment="Added experiments">
+      <change afterPath="$PROJECT_DIR$/.idea/csv-plugin.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/regression_report-DualAQD-Concrete.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/regression_report-DualAQD-Concrete.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/validation_MPIW-DualAQD-Concrete.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/validation_MPIW-DualAQD-Concrete.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/validation_PICP-DualAQD-Concrete.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/validation_PICP-DualAQD-Concrete.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-1" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-10" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-10" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-10_historyMPIW.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-10_historyMPIW.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-10_historyMPIWtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-10_historyMPIWtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-10_historyPICP.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-10_historyPICP.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-10_historyPICPtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-10_historyPICPtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-1_historyMPIW.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-1_historyMPIW.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-1_historyMPIWtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-1_historyMPIWtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-1_historyPICP.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-1_historyPICP.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-1_historyPICPtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-1_historyPICPtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-2" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-2_historyMPIW.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-2_historyMPIW.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-2_historyMPIWtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-2_historyMPIWtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-2_historyMSEtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-2_historyMSEtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-2_historyPICP.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-2_historyPICP.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-2_historyPICPtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-2_historyPICPtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-3" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-3_historyMPIW.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-3_historyMPIW.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-3_historyMPIWtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-3_historyMPIWtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-3_historyMSEtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-3_historyMSEtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-3_historyPICP.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-3_historyPICP.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-3_historyPICPtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-3_historyPICPtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-4" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-4_historyMPIW.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-4_historyMPIW.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-4_historyMPIWtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-4_historyMPIWtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-4_historyMSEtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-4_historyMSEtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-4_historyPICP.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-4_historyPICP.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-4_historyPICPtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-4_historyPICPtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-5" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-5" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-5_historyMPIW.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-5_historyMPIW.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-5_historyMPIWtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-5_historyMPIWtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-5_historyMSEtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-5_historyMSEtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-5_historyPICP.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-5_historyPICP.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-5_historyPICPtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-5_historyPICPtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-6" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-6" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-6_historyMPIW.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-6_historyMPIW.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-6_historyMPIWtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-6_historyMPIWtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-6_historyPICP.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-6_historyPICP.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-6_historyPICPtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-6_historyPICPtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-7" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-7" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-7_historyMPIW.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-7_historyMPIW.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-7_historyMPIWtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-7_historyMPIWtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-7_historyPICP.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-7_historyPICP.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-7_historyPICPtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-7_historyPICPtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-8" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-8" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-8_historyMPIW.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-8_historyMPIW.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-8_historyMPIWtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-8_historyMPIWtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-8_historyPICP.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-8_historyPICP.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-8_historyPICPtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-8_historyPICPtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-9" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-9" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-9_historyMPIW.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-9_historyMPIW.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-9_historyMPIWtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-9_historyMPIWtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-9_historyPICP.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-9_historyPICP.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-9_historyPICPtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Concrete/DualAQD/weights-DualAQD-Concrete-9_historyPICPtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/regression_report-DualAQD-Energy.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/regression_report-DualAQD-Energy.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/validation_MPIW-DualAQD-Energy.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/validation_MPIW-DualAQD-Energy.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/validation_MSE-DualAQD-Energy.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/validation_MSE-DualAQD-Energy.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/validation_PICP-DualAQD-Energy.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/validation_PICP-DualAQD-Energy.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-1" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-10" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-10" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-10_historyMPIW.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-10_historyMPIW.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-10_historyMPIWtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-10_historyMPIWtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-10_historyMSE.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-10_historyMSE.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-10_historyMSEtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-10_historyMSEtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-10_historyPICP.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-10_historyPICP.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-10_historyPICPtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-10_historyPICPtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-10_validationMSE" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-10_validationMSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-1_historyMPIW.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-1_historyMPIW.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-1_historyMPIWtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-1_historyMPIWtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-1_historyMSE.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-1_historyMSE.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-1_historyMSEtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-1_historyMSEtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-1_historyPICP.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-1_historyPICP.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-1_historyPICPtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-1_historyPICPtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-1_validationMSE" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-1_validationMSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-2" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-2_historyMPIW.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-2_historyMPIW.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-2_historyMPIWtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-2_historyMPIWtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-2_historyMSE.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-2_historyMSE.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-2_historyMSEtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-2_historyMSEtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-2_historyPICP.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-2_historyPICP.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-2_historyPICPtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-2_historyPICPtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-2_validationMSE" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-2_validationMSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-3" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-3_historyMPIW.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-3_historyMPIW.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-3_historyMPIWtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-3_historyMPIWtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-3_historyMSE.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-3_historyMSE.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-3_historyMSEtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-3_historyMSEtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-3_historyPICP.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-3_historyPICP.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-3_historyPICPtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-3_historyPICPtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-3_validationMSE" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-3_validationMSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-4" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-4_historyMPIW.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-4_historyMPIW.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-4_historyMPIWtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-4_historyMPIWtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-4_historyMSE.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-4_historyMSE.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-4_historyMSEtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-4_historyMSEtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-4_historyPICP.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-4_historyPICP.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-4_historyPICPtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-4_historyPICPtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-4_validationMSE" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-4_validationMSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-5" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-5" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-5_historyMPIW.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-5_historyMPIW.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-5_historyMPIWtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-5_historyMPIWtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-5_historyMSE.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-5_historyMSE.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-5_historyMSEtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-5_historyMSEtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-5_historyPICP.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-5_historyPICP.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-5_historyPICPtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-5_historyPICPtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-5_validationMSE" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-5_validationMSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-6" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-6" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-6_historyMPIW.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-6_historyMPIW.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-6_historyMPIWtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-6_historyMPIWtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-6_historyMSE.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-6_historyMSE.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-6_historyMSEtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-6_historyMSEtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-6_historyPICP.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-6_historyPICP.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-6_historyPICPtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-6_historyPICPtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-6_validationMSE" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-6_validationMSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-7" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-7" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-7_historyMPIW.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-7_historyMPIW.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-7_historyMPIWtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-7_historyMPIWtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-7_historyMSE.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-7_historyMSE.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-7_historyMSEtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-7_historyMSEtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-7_historyPICP.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-7_historyPICP.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-7_historyPICPtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-7_historyPICPtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-7_validationMSE" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-7_validationMSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-8" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-8" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-8_historyMPIW.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-8_historyMPIW.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-8_historyMPIWtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-8_historyMPIWtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-8_historyMSE.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-8_historyMSE.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-8_historyMSEtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-8_historyMSEtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-8_historyPICP.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-8_historyPICP.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-8_historyPICPtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-8_historyPICPtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-8_validationMSE" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-8_validationMSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-9" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-9" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-9_historyMPIW.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-9_historyMPIW.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-9_historyMPIWtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-9_historyMPIWtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-9_historyMSE.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-9_historyMSE.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-9_historyMSEtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-9_historyMSEtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-9_historyPICP.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-9_historyPICP.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-9_historyPICPtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-9_historyPICPtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-9_validationMSE" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Energy/DualAQD/weights-DualAQD-Energy-9_validationMSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-1" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-1_historyMPIW.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-1_historyMPIW.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-1_historyMPIWtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-1_historyMPIWtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-1_historyMSE.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-1_historyMSE.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-1_historyMSEtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-1_historyMSEtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-1_historyPICP.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-1_historyPICP.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-1_historyPICPtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-1_historyPICPtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-1_validationMSE" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-1_validationMSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-2" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-2_historyMPIW.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-2_historyMPIW.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-2_historyMPIWtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-2_historyMPIWtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-2_historyMSE.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-2_historyMSE.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-2_historyMSEtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-2_historyMSEtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-2_historyPICP.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-2_historyPICP.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-2_historyPICPtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-2_historyPICPtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-2_validationMSE" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-2_validationMSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-3" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-3_historyMPIW.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-3_historyMPIW.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-3_historyMPIWtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-3_historyMPIWtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-3_historyMSE.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-3_historyMSE.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-3_historyMSEtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-3_historyMSEtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-3_historyPICP.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-3_historyPICP.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-3_historyPICPtr.npy" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-3_historyPICPtr.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-3_validationMSE" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-3_validationMSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-4" beforeDir="false" afterPath="$PROJECT_DIR$/CVResults/Kin8nm/DualAQD/weights-DualAQD-Kin8nm-4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PIGenerator.py" beforeDir="false" afterPath="$PROJECT_DIR$/PIGenerator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/NNModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/NNModel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -206,9 +33,20 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="Jupyter Notebook" />
+        <option value="Python Script" />
       </list>
+    </option>
+  </component>
+  <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
+    <envs>
+      <env key="FLASK_APP" value="app" />
+    </envs>
+    <option name="myCustomStartScript" value="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))" />
+    <option name="myEnvs">
+      <map>
+        <entry key="FLASK_APP" value="app" />
+      </map>
     </option>
   </component>
   <component name="Git.Settings">
@@ -229,51 +67,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "true",
-    "last_opened_file_path": "C:/Users/w63x712/Documents/Machine_Learning/PredictionIntervals/Datasets",
-    "nodejs_package_manager_path": "npm"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Machine_Learning/PredictionIntervals&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\w63x712\Documents\Machine_Learning\PredictionIntervals\Datasets" />
+      <recent name="D:\Machine_Learning\PredictionIntervals" />
+      <recent name="D:\Machine_Learning\PredictionIntervals\src\Trainer" />
       <recent name="C:\Users\w63x712\Documents\Machine_Learning\PredictionIntervals" />
+      <recent name="C:\Users\w63x712\Documents\Machine_Learning\PredictionIntervals\Datasets" />
       <recent name="C:\Users\w63x712\Documents\Machine_Learning\PredictionIntervals\models" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Machine_Learning\PredictionIntervals\src\PredictionIntervals" />
+      <recent name="D:\Machine_Learning\PredictionIntervals\src\DualAQD" />
+      <recent name="D:\Machine_Learning\PredictionIntervals\src" />
+      <recent name="C:\Users\w63x712\Documents\Machine_Learning\PredictionIntervals\models" />
       <recent name="C:\Users\w63x712\Documents\Machine_Learning\PredictionIntervals\TuningResults\Boston\QD" />
-      <recent name="C:\Users\w63x712\Documents\Machine_Learning\PredictionIntervals\model" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.PIGenerator">
-    <configuration name="Main" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="PredictionIntervals" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="C:\Users\w63x712\Documents\Machine_Learning\PredictionIntervals\PIGenerator.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="true" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="PIGenerator" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.Main">
+    <configuration name="Main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="PredictionIntervals" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -283,29 +107,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/PIGenerator.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="true" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="ParetoFront" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="PredictionIntervals" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="C:\Users\w63x712\Documents\Machine_Learning\PredictionIntervals\StatisticsandPlots.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -328,6 +130,47 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/StatisticsandPlots.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TrainNN (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="PredictionIntervals" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/PredictionIntervals/Trainer" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/PredictionIntervals/Trainer/TrainNN.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TrainNN" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="PredictionIntervals" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/DualAQD/Trainer" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/DualAQD/Trainer/TrainNN.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -362,13 +205,16 @@
       <module name="PredictionIntervals" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/utils.py" />
+      <option name="SCRIPT_NAME" value="D:\Machine_Learning\PredictionIntervals\src\PredictionIntervals\utils.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -379,11 +225,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.PIGenerator" />
+        <item itemvalue="Python.Main" />
+        <item itemvalue="Python.TrainNN (1)" />
+        <item itemvalue="Python.TrainNN" />
         <item itemvalue="Python.utils" />
-        <item itemvalue="Python.Main" />
         <item itemvalue="Python.StatisticsandPlots" />
-        <item itemvalue="Python.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -483,7 +329,26 @@
       <workItem from="1676416518460" duration="1911000" />
       <workItem from="1676671068965" duration="39000" />
       <workItem from="1678924274237" duration="12035000" />
-      <workItem from="1678969800189" duration="19284000" />
+      <workItem from="1678969800189" duration="66259000" />
+      <workItem from="1679876780748" duration="1018000" />
+      <workItem from="1680144063448" duration="5104000" />
+      <workItem from="1690213427693" duration="724000" />
+      <workItem from="1690214467845" duration="949000" />
+      <workItem from="1690226650723" duration="763000" />
+      <workItem from="1690313047249" duration="1970000" />
+      <workItem from="1691169992952" duration="8804000" />
+      <workItem from="1691797640210" duration="21000" />
+      <workItem from="1694631067246" duration="656000" />
+      <workItem from="1695082771881" duration="1031000" />
+      <workItem from="1698248388454" duration="1525000" />
+      <workItem from="1701737544062" duration="2028000" />
+      <workItem from="1701808724927" duration="66000" />
+      <workItem from="1701809227077" duration="68000" />
+      <workItem from="1701812761005" duration="1469000" />
+      <workItem from="1701814765195" duration="42000" />
+      <workItem from="1701815162428" duration="1924000" />
+      <workItem from="1704987282499" duration="39000" />
+      <workItem from="1711040303604" duration="27648000" />
     </task>
     <task id="LOCAL-00001" summary="Cleaned code">
       <created>1676407462609</created>
@@ -499,7 +364,196 @@
       <option name="project" value="LOCAL" />
       <updated>1676427373833</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Adding Protein experiments">
+      <created>1679332582156</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1679332582156</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Added experiments">
+      <created>1680221760994</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1680221760995</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Added experiments">
+      <created>1680222433791</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1680222433791</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Added experiments">
+      <created>1680222647221</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1680222647221</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Added toy example">
+      <created>1691184628336</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1691184628336</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Toy example">
+      <created>1691185950168</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1691185950168</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Added comments">
+      <created>1701737682649</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1701737682649</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Added comments">
+      <created>1701809282404</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1701809282404</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Added experiments">
+      <created>1701814799682</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1701814799682</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Fixed bugs in NNModel">
+      <created>1701815290846</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1701815290846</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Added comments">
+      <created>1701818348418</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1701818348418</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Re-structured project">
+      <created>1711051843555</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1711051843555</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Added experiments">
+      <created>1711052058470</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1711052058470</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Added experiments">
+      <created>1711052303166</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1711052303166</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Formatted as a Python library">
+      <created>1711052998572</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1711052998572</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Formatted as a Python package">
+      <created>1711053444007</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1711053444007</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Formatted as a Python package">
+      <created>1711057817523</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1711057817523</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Formatted as a Python package">
+      <created>1711058702536</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1711058702536</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Formatted as a Python package">
+      <created>1711060880295</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1711060880295</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Formatted as a Python package">
+      <created>1711063891520</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1711063891520</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Added early stopping and plotting">
+      <created>1711067183378</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1711067183378</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Improved learning curves">
+      <created>1711070094820</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1711070094820</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Improved learning curves">
+      <created>1711071203154</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1711071203154</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Added Google Colab notebook">
+      <created>1711072756352</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1711072756352</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Updated README.md">
+      <created>1711072979903</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1711072979903</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Updated README.md">
+      <created>1711073410951</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1711073410951</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Updated README.md">
+      <created>1711073656106</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1711073656106</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -518,10 +572,25 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Cleaned code" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cleaned code" />
+    <MESSAGE value="Adding Protein experiments" />
+    <MESSAGE value="Added toy example" />
+    <MESSAGE value="Toy example" />
+    <MESSAGE value="Fixed bugs in NNModel" />
+    <MESSAGE value="Added comments" />
+    <MESSAGE value="Re-structured project" />
+    <MESSAGE value="Added experiments" />
+    <MESSAGE value="Formatted as a Python library" />
+    <MESSAGE value="Formatted as a Python package" />
+    <MESSAGE value="Added early stopping and plotting" />
+    <MESSAGE value="Improved learning curves" />
+    <MESSAGE value="Added Google Colab notebook" />
+    <MESSAGE value="Updated README.md" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated README.md" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/PredictionIntervals$Main.coverage" NAME="Main Coverage Results" MODIFIED="1667705547187" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/PredictionIntervals$PIGenerator.coverage" NAME="PIGenerator Coverage Results" MODIFIED="1679330510847" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/PredictionIntervals$Main.coverage" NAME="Main Coverage Results" MODIFIED="1711063011829" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/PredictionIntervals$TrainNN.coverage" NAME="TrainNN Coverage Results" MODIFIED="1711049050224" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/DualAQD/Trainer" />
+    <SUITE FILE_PATH="coverage/PredictionIntervals$PIGenerator.coverage" NAME="PIGenerator Coverage Results" MODIFIED="1679588970476" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/PredictionIntervals$utils.coverage" NAME="utils Coverage Results" MODIFIED="1701813980542" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

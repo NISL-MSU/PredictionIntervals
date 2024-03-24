@@ -75,11 +75,12 @@ class Trainer:
             Yeval = applyMinMaxScale(Yeval, self.maxs, self.mins)
         return Xeval, Yeval
 
-    def evaluate(self, Xeval, Yeval=None, normData: bool = False):
+    def evaluate(self, Xeval, Yeval=None, normData: bool = False, returnRaw: bool = False):
         """Calculate metrics using a PI-generation method to quantify uncertainty
         :param Xeval: Evaluation data
         :param Yeval : Optional. Evaluation targets
         :param normData: If True, apply the same normalization that was applied to the training set
+        :param returnRaw: If True, return as an additional output the prediction obtained using MC-Dropout before aggregation
         """
         if normData:
             Xeval, Yeval = self._apply_normalization(Xeval, Yeval)
@@ -89,14 +90,14 @@ class Trainer:
         yout = self.model.evaluateFoldUncertainty(valxn=Xeval, maxs=None, mins=None, batch_size=32, MC_samples=50)
         yout = np.array(yout)
         if self.method == 'DualAQD':
+            yout[:, 0] = reverseMinMaxScale(yout[:, 0], self.maxs, self.mins)
+            yout[:, 1] = reverseMinMaxScale(yout[:, 1], self.maxs, self.mins)
+            yout[:, 2] = reverseMinMaxScale(yout[:, 2], self.maxs, self.mins)
             # Obtain upper and lower bounds
             y_u = np.mean(yout[:, 0], axis=1)
             y_l = np.mean(yout[:, 1], axis=1)
             # Obtain expected target estimates
             ypred = np.mean(yout[:, 2], axis=1)
-            ypred = reverseMinMaxScale(ypred, self.maxs, self.mins)
-            y_u = reverseMinMaxScale(y_u, self.maxs, self.mins)
-            y_l = reverseMinMaxScale(y_l, self.maxs, self.mins)
         else:
             # Load validation MSE
             with open(self.f + '_validationMSE', 'rb') as f:
@@ -125,9 +126,15 @@ class Trainer:
             MPIW = torch.mean(y_ut - y_lt).item()
             # Calculate PICP
             PICP = torch.mean(K).item()
-            return [val_mse, PICP, MPIW, ypred, y_u, y_l]
+            if returnRaw:
+                return [val_mse, PICP, MPIW, ypred, y_u, y_l, yout]
+            else:
+                return [val_mse, PICP, MPIW, ypred, y_u, y_l]
         else:  # If the targets of the evaluation data are not known, just return predictions
-            return ypred, y_u, y_l
+            if returnRaw:
+                return ypred, y_u, y_l, yout
+            else:
+                return ypred, y_u, y_l
 
 
 if __name__ == '__main__':

@@ -22,7 +22,6 @@ The following libraries have to be installed:
 * [Pytorch](https://pytorch.org/)
 
 To install the package, run `!pip install -q git+https://github.com/NISL-MSU/PredictionIntervals` in the terminal. 
-This will also install additional packages such as pymoo, sklearn, and tensorboard.
 
 You can also try the package on [Google Colab](https://colab.research.google.com/github/NISL-MSU/PredictionIntervals/blob/master/DualAQD_PredictionIntervals.ipynb).
 
@@ -32,7 +31,7 @@ You can also try the package on [Google Colab](https://colab.research.google.com
 
 DualAQD uses two neural networks: a target-estimation network $f$ that is trained to generate accurate estimates, and a PI-generation NN $g$ that produces the upper and lower bounds of a prediction interval.
 
-First, create an instance of the class `PredictionIntervalsTrainer.`
+First, create an instance of the class `Trainer`.
 
 **Parameters**:
 

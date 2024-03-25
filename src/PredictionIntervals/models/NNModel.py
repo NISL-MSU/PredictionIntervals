@@ -211,14 +211,14 @@ class NNModel:
 
     def trainFold(self, Xtrain, Ytrain, Xval, Yval, batch_size, epochs, filepath, printProcess, yscale,
                   alpha_=0.01, plot_curves=False):
-        if self.method in ['AQD', 'MCDropout']:  # Initialize seed to get reproducible results when using these methods
-            np.random.seed(7)
-            random.seed(7)
-            torch.manual_seed(7)
-            torch.cuda.manual_seed(7)
-            torch.backends.cudnn.deterministic = True
-            torch.backends.cudnn.benchmark = False
-        # Otherwise, QD+ and QD need to generate different NNs each time in order to create a diverse ensemble
+        # if self.method in ['AQD', 'MCDropout']:  # Initialize seed to get reproducible results when using these methods
+        #     np.random.seed(7)
+        #     random.seed(7)
+        #     torch.manual_seed(7)
+        #     torch.cuda.manual_seed(7)
+        #     torch.backends.cudnn.deterministic = True
+        #     torch.backends.cudnn.benchmark = False
+        # # Otherwise, QD+ and QD need to generate different NNs each time in order to create a diverse ensemble
 
         # Prepare list of indexes for shuffling
         if Xtrain.ndim == 1:
@@ -508,12 +508,12 @@ class NNModel:
 
     def evaluateFoldUncertainty(self, valxn, maxs=None, mins=None, batch_size=512, MC_samples=50):
         """Retrieve point predictions and PIs"""
-        np.random.seed(7)  # Initialize seed to get reproducible results
-        random.seed(7)
-        torch.manual_seed(7)
-        torch.cuda.manual_seed(7)
-        torch.backends.cudnn.deterministic = True
-        torch.backends.cudnn.benchmark = False
+        # np.random.seed(7)  # Initialize seed to get reproducible results
+        # random.seed(7)
+        # torch.manual_seed(7)
+        # torch.cuda.manual_seed(7)
+        # torch.backends.cudnn.deterministic = True
+        # torch.backends.cudnn.benchmark = False
         if maxs is not None and mins is not None:
             valxn = reverseMinMaxScale(valxn, maxs, mins)
 

@@ -528,7 +528,8 @@ class NNModel:
                 ypred = []
                 self.model.network.eval()
                 if self.method in ["DualAQD", "MCDropout"]:  # Only these methods activate Dropout layers during test
-                    enable_dropout(self.model.network)  # Set Dropout layers to test mode
+                    if MC_samples >= 1:
+                        enable_dropout(self.model.network)  # Set Dropout layers to test mode
                 Teva = np.ceil(1.0 * len(valxn) / batch_size).astype(np.int32)  # Number of batches
                 indtest = np.arange(len(valxn))
                 for b in range(Teva):
@@ -536,7 +537,8 @@ class NNModel:
                     ypred_batch = self.model.network(torch.from_numpy(valxn[inds]).float().to(self.device))
                     if self.method == "DualAQD":
                         self.basemodel.model.network.eval()
-                        enable_dropout(self.basemodel.model.network)
+                        if MC_samples >= 1:
+                            enable_dropout(self.basemodel.model.network)
                         ypred_batch = ypred_batch.cpu().numpy()
                         ypred_batchtmp = np.zeros((ypred_batch.shape[0], 3))
                         pe_batch = self.basemodel.model.network(torch.from_numpy(valxn[inds]).float().to(self.device))

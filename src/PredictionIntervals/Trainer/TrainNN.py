@@ -75,19 +75,28 @@ class Trainer:
             Yeval = applyMinMaxScale(Yeval, self.maxs, self.mins)
         return Xeval, Yeval
 
-    def evaluate(self, Xeval, Yeval=None, normData: bool = False, returnRaw: bool = False):
+    def evaluate(self, Xeval, Yeval=None, normData: bool = False, returnRaw: bool = False, MC_samples: int = 50):
         """Calculate metrics using a PI-generation method to quantify uncertainty
         :param Xeval: Evaluation data
         :param Yeval : Optional. Evaluation targets
         :param normData: If True, apply the same normalization that was applied to the training set
         :param returnRaw: If True, return as an additional output the prediction obtained using MC-Dropout before aggregation
+        :param MC_samples: How many samples will be used during the MC-Dropout process. If 1, MC-Dropout is not used for DualAQD
         """
         if normData:
             Xeval, Yeval = self._apply_normalization(Xeval, Yeval)
 
+        if MC_samples <= 0:
+            print("MC_samples should be greater than zero. Assuming MC_samples = 50.")
+            MC_samples = 50
+        if MC_samples == 1 and self.method == 'MCDropout':
+            print("MC_samples should be greater than 1 when using the MCDropout method. Assuming MC_samples = 50.")
+            MC_samples = 50
+        MC_samples = round(MC_samples)
+
         self.model.loadModel(self.f)  # Load model
         # Get outputs using trained model
-        yout = self.model.evaluateFoldUncertainty(valxn=Xeval, maxs=None, mins=None, batch_size=32, MC_samples=50)
+        yout = self.model.evaluateFoldUncertainty(valxn=Xeval, maxs=None, mins=None, batch_size=32, MC_samples=MC_samples)
         yout = np.array(yout)
         if self.method == 'DualAQD':
             yout[:, 0] = reverseMinMaxScale(yout[:, 0], self.maxs, self.mins)

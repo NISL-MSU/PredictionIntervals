@@ -51,7 +51,9 @@ def DualAQD_objective(y_pred, y_true, eta_, pe):
         # Calculate loss
         Loss_S = MPIW_p + Constraints * eta_
     else:  # During the first epochs, the lower and upper bounds are trained to match the output of the first NN
-        MPIW_p = torch.mean(torch.abs(y_u - y_o) + torch.abs(y_o - y_l))  # Calculate MPIW_penalty
+        # MPIW_p = - torch.mean(torch.abs(y_u - y_o) + torch.abs(y_o - y_l))  # Calculate MPIW_penalty
+        # Loss_S = MPIW_p
+        MPIW_p = 1000 - (torch.mean((y_u - y_o)) + torch.mean((y_o - y_l)))  # Calculate MPIW_penalty
         Loss_S = MPIW_p
 
     return Loss_S
@@ -237,8 +239,8 @@ class NNModel:
         widths = [0]
         picp, picptr, max_picptr, epoch_max_picptr = 0, 0, 0, 0
         first95 = True  # This is a flag used to check if validation PICP has already reached 95% during the training
-        warmup = 10  # Warmup period. Just helps to get rid of inconsistencies faster
-        warmup2 = 50  # Warmup period. Just helps to get rid of inconsistencies faster
+        warmup = 50  # Warmup period. Just helps to get rid of inconsistencies faster
+        warmup2 = 70  # Warmup period. Just helps to get rid of inconsistencies faster
         top = 1
         alpha_0 = alpha_
         err_prev, err_new, beta_, beta_prev, d_err = 0, 0, 1, 0, 1
@@ -440,7 +442,7 @@ class NNModel:
             elif self.method == 'DualAQD' and epoch > 1000:
                 if not improved:
                     cnt += 1
-                    if cnt == 200:
+                    if cnt == 600:
                         print("Early stopping at epoch: ", epoch)
                         break
                 else:

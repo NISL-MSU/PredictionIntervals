@@ -233,6 +233,10 @@ class NNModel:
         Ytrain = Ytrain[indexes]
         T = np.ceil(1.0 * len(Xtrain) / batch_size).astype(np.int32)  # Compute the number of steps in an epoch
 
+        # For each sample in the training set, find the k-NNs
+        nbrs = NearestNeighbors(n_neighbors=10, algorithm='auto').fit(Xtrain)
+        _, indices_neighbors = nbrs.kneighbors(Xtrain)
+
         # Variables initialization
         val_mse = np.infty
         val_picp = 0
@@ -379,13 +383,11 @@ class NNModel:
                     PICP.append(picp)
 
                     # For each sample in the training set, find k-NN and calculate the minimum distance to upper and lower bounds
-                    nbrs = NearestNeighbors(n_neighbors=10, algorithm='auto').fit(Xtrain)
-                    _, indices = nbrs.kneighbors(Xtrain)
-                    widths = np.zeros(indices.shape[0])
-                    for w in range(indices.shape[0]):
-                        y_neighbors = y_true[indices]
-                        UB_neighbors = y_utr.cpu().numpy()[indices]
-                        LB_neighbors = y_ltr.cpu().numpy()[indices]
+                    widths = np.zeros(indices_neighbors.shape[0])
+                    for w in range(indices_neighbors.shape[0]):
+                        y_neighbors = y_true[indices_neighbors[w, :]]
+                        UB_neighbors = y_utr.cpu().numpy()[indices_neighbors[w, :]]
+                        LB_neighbors = y_ltr.cpu().numpy()[indices_neighbors[w, :]]
                         widths[w] = np.min(np.abs(y_neighbors - LB_neighbors)) + np.min(np.abs(UB_neighbors - y_neighbors))
 
                     # # Get a vector of all the PI widths in the training set

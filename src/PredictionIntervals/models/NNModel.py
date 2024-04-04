@@ -1,6 +1,7 @@
 import time
 
-import matplotlib.pyplot as plt
+import numpy as np
+# import matplotlib.pyplot as plt
 import torch
 import pickle
 import random
@@ -8,6 +9,7 @@ from tqdm import trange
 from torch import optim
 from ..utils import *
 from .network import *
+from sklearn.neighbors import NearestNeighbors
 
 
 np.random.seed(7)  # Initialize seed to get reproducible results
@@ -212,7 +214,7 @@ class NNModel:
         self.model = NNObject(network, criterion, optimizer)
 
     def trainFold(self, Xtrain, Ytrain, Xval, Yval, batch_size, epochs, filepath, printProcess, yscale,
-                  alpha_=0.01, plot_curves=False):
+                  alpha_=0.1, plot_curves=False):
         # if self.method in ['AQD', 'MCDropout']:  # Initialize seed to get reproducible results when using these methods
         #     np.random.seed(7)
         #     random.seed(7)
@@ -239,8 +241,8 @@ class NNModel:
         widths = [0]
         picp, picptr, max_picptr, epoch_max_picptr = 0, 0, 0, 0
         first95 = True  # This is a flag used to check if validation PICP has already reached 95% during the training
-        warmup = 30  # Warmup period. Just helps to get rid of inconsistencies faster
-        warmup2 = 50  # Warmup period. Just helps to get rid of inconsistencies faster
+        warmup = 50  # Warmup period. Just helps to get rid of inconsistencies faster
+        warmup2 = 70  # Warmup period. Just helps to get rid of inconsistencies faster
         top = 1
         alpha_0 = alpha_
         err_prev, err_new, beta_, beta_prev, d_err = 0, 0, 1, 0, 1
@@ -275,10 +277,10 @@ class NNModel:
         cnt = 0
         for epoch in trange(epochs):  # Epoch loop
             # Batch sorting
-            # if epoch > warmup and (self.method in ['DualAQD', 'QD', 'QD+']):
-            #     indexes = np.argsort(widths)
-            # else:
-            np.random.shuffle(indexes)
+            if epoch > warmup and (self.method in ['DualAQD', 'QD', 'QD+']):
+                indexes = np.argsort(widths)
+            else:
+                np.random.shuffle(indexes)
 
             # Shuffle batches
             list_inds = []
@@ -375,8 +377,19 @@ class NNModel:
                     picp = torch.mean(K).item()
                     MPIW.append(width)
                     PICP.append(picp)
-                    # Get a vector of all the PI widths in the training set
-                    widths = (y_utr - y_ltr).cpu().numpy()
+
+                    # For each sample in the training set, find k-NN and calculate the minimum distance to upper and lower bounds
+                    nbrs = NearestNeighbors(n_neighbors=10, algorithm='auto').fit(Xtrain.cpu().numpy())
+                    _, indices = nbrs.kneighbors(Xtrain.cpu().numpy())
+                    widths = np.zeros(indices.shape[0])
+                    for w in range(indices.shape[0]):
+                        y_neighbors = y_true[indices]
+                        UB_neighbors = y_utr[indices]
+                        LB_neighbors = y_ltr[indices]
+                        widths[w] = np.min(np.abs(y_neighbors - LB_neighbors)) + np.min(np.abs(UB_neighbors - y_neighbors))
+
+                    # # Get a vector of all the PI widths in the training set
+                    # widths = (y_utr - y_ltr).cpu().numpy()
 
             ##################################################
             # Save model if there's improvement
@@ -442,7 +455,7 @@ class NNModel:
             elif self.method == 'DualAQD' and epoch > 1000:
                 if not improved:
                     cnt += 1
-                    if cnt == 600:
+                    if cnt == 1000:
                         print("Early stopping at epoch: ", epoch)
                         break
                 else:

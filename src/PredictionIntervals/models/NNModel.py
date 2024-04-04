@@ -214,7 +214,7 @@ class NNModel:
         self.model = NNObject(network, criterion, optimizer)
 
     def trainFold(self, Xtrain, Ytrain, Xval, Yval, batch_size, epochs, filepath, printProcess, yscale,
-                  alpha_=0.1, plot_curves=False):
+                  alpha_=0.01, plot_curves=False):
         # if self.method in ['AQD', 'MCDropout']:  # Initialize seed to get reproducible results when using these methods
         #     np.random.seed(7)
         #     random.seed(7)

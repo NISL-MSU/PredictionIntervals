@@ -30,6 +30,7 @@ class Trainer:
 
         # Normalization
         self.normData = normData
+        self.X, self.Xval, self.Y, self.Yval = None, None, None, None
         self.set_data(X, Y, Xval, Yval)
 
     def reset_model(self):
@@ -55,18 +56,19 @@ class Trainer:
             os.mkdir(folder)
         return folder + "//weights-NN-" + self.name
 
-    def train(self, batch_size=16, epochs=1000, eta_=0.01, printProcess=False, plotCurves=False):
+    def train(self, batch_size=16, epochs=1000, eta_=0.01, printProcess=False, plotCurves=False, scratch=True):
         """Train method
         :param batch_size: Mini batch size. It is recommended a small number, like 16
         :param epochs: Number of training epochs
         :param eta_: Scale factor used to update the self-adaptive coefficient lambda (Eq. 6 of the paper)
         :param printProcess: If True, print the training process (loss and validation metrics after each epoch)
         :param plotCurves: If True, plot the training and validation curves at the end of the training process
+        :param scratch: If True, train the model from scratch, initializing the model to produce wide PIs for OOD samples
         """
         _, _, _, val_mse, PICP, MPIW = self.model.trainFold(Xtrain=self.X, Ytrain=self.Y, Xval=self.Xval,
                                                             Yval=self.Yval,
                                                             batch_size=batch_size, epochs=epochs, filepath=self.f,
-                                                            printProcess=printProcess, alpha_=eta_,
+                                                            printProcess=printProcess, alpha_=eta_, scratch=scratch,
                                                             yscale=[self.maxs, self.mins], plot_curves=plotCurves)
         # Run the model over the validation set 'MC-samples' times and Calculate PIs and metrics
         if self.method not in ['DualAQD']:  # DualAQD already performs validation and aggregation in "trainFold"

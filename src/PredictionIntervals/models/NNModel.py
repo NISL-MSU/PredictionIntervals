@@ -214,7 +214,7 @@ class NNModel:
         self.model = NNObject(network, criterion, optimizer)
 
     def trainFold(self, Xtrain, Ytrain, Xval, Yval, batch_size, epochs, filepath, printProcess, yscale,
-                  alpha_=0.01, plot_curves=False):
+                  alpha_=0.01, plot_curves=False, scratch=True):
         # if self.method in ['AQD', 'MCDropout']:  # Initialize seed to get reproducible results when using these methods
         #     np.random.seed(7)
         #     random.seed(7)
@@ -247,10 +247,12 @@ class NNModel:
         first95 = True  # This is a flag used to check if validation PICP has already reached 95% during the training
         warmup = 30  # Warmup period. Just helps to get rid of inconsistencies faster
         warmup2 = 50  # Warmup period. Just helps to get rid of inconsistencies faster
+        if not scratch:
+            warmup, warmup2 = 0, 0
         top = 1
         alpha_0 = alpha_
         err_prev, err_new, beta_, beta_prev, d_err = 0, 0, 1, 0, 1
-        early_stopping = EarlyStopping(min_delta=1e-6)
+        early_stopping = EarlyStopping(min_delta=1e-5)
 
         ##############################################################
         # If the method is DualAQD, start training the base network
@@ -307,7 +309,7 @@ class NNModel:
                 outputs = self.model.network(Xtrainb)
                 if self.method == 'DualAQD':
                     point_estimates = self.basemodel.model.network(Xtrainb)
-                    if epoch > warmup:
+                    if epoch > warmup or not scratch:
                         loss = DualAQD_objective(outputs, Ytrainb, eta_=beta_, pe=point_estimates)
                     else:  # During the warmup period the objective is that \hat{y}^u = \hat{y}^l = \hat{y}
                         loss = DualAQD_objective(outputs, Ytrainb, eta_=None, pe=point_estimates)

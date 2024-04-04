@@ -379,8 +379,8 @@ class NNModel:
                     PICP.append(picp)
 
                     # For each sample in the training set, find k-NN and calculate the minimum distance to upper and lower bounds
-                    nbrs = NearestNeighbors(n_neighbors=10, algorithm='auto').fit(Xtrain.cpu().numpy())
-                    _, indices = nbrs.kneighbors(Xtrain.cpu().numpy())
+                    nbrs = NearestNeighbors(n_neighbors=10, algorithm='auto').fit(Xtrain)
+                    _, indices = nbrs.kneighbors(Xtrain)
                     widths = np.zeros(indices.shape[0])
                     for w in range(indices.shape[0]):
                         y_neighbors = y_true[indices]

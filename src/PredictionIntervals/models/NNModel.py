@@ -251,7 +251,7 @@ class NNModel:
             warmup, warmup2 = 0, 0
         top = 1
         alpha_0 = alpha_
-        err_prev, err_new, beta_, beta_prev, d_err = 0, 0, 1, 0, 1
+        err_prev, err_new, beta_, beta_prev, d_err = 0, 0, 0.1, 0, 1
         early_stopping = EarlyStopping(min_delta=1e-5)
 
         ##############################################################

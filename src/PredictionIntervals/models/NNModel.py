@@ -442,7 +442,7 @@ class NNModel:
             elif self.method == 'DualAQD' and epoch > 1000:
                 if not improved:
                     cnt += 1
-                    if cnt == 600:
+                    if cnt == 1000:
                         print("Early stopping at epoch: ", epoch)
                         break
                 else:

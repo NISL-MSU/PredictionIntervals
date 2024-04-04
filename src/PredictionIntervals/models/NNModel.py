@@ -245,8 +245,8 @@ class NNModel:
         widths = [0]
         picp, picptr, max_picptr, epoch_max_picptr = 0, 0, 0, 0
         first95 = True  # This is a flag used to check if validation PICP has already reached 95% during the training
-        warmup = 50  # Warmup period. Just helps to get rid of inconsistencies faster
-        warmup2 = 70  # Warmup period. Just helps to get rid of inconsistencies faster
+        warmup = 30  # Warmup period. Just helps to get rid of inconsistencies faster
+        warmup2 = 50  # Warmup period. Just helps to get rid of inconsistencies faster
         top = 1
         alpha_0 = alpha_
         err_prev, err_new, beta_, beta_prev, d_err = 0, 0, 1, 0, 1

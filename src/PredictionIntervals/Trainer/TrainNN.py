@@ -5,7 +5,8 @@ from ..models.NNModel import NNModel
 
 
 class Trainer:
-    def __init__(self, X: np.array, Y: np.array, Xval: np.array, Yval: np.array, method: str = 'DualAQD', normData: bool = True):
+    def __init__(self, X: np.array, Y: np.array, Xval: np.array, Yval: np.array, method: str = 'DualAQD',
+                 normData: bool = True):
         """
         Train a PI-generation NN using DualAQD
         :param X: Input data (explainable variables). 2-D numpy array, shape (#samples, #features)
@@ -29,7 +30,13 @@ class Trainer:
 
         # Normalization
         self.normData = normData
-        if normData:
+        self.set_data(X, Y, Xval, Yval)
+
+    def reset_model(self):
+        return NNModel(device=self.device, nfeatures=self.n_features, method=self.method)
+
+    def set_data(self, X: np.array, Y: np.array, Xval: np.array, Yval: np.array):
+        if self.normData:
             self.X, self.means, self.stds = normalize(X)
             self.Y, self.maxs, self.mins = minMaxScale(Y)
             self.Xval = applynormalize(Xval, self.means, self.stds)
@@ -38,9 +45,6 @@ class Trainer:
             self.X, self.means, self.stds = X, None, None
             self.Y, self.maxs, self.mins = Y, None, None
             self.Xval, self.Yval = Xval, Yval
-
-    def reset_model(self):
-        return NNModel(device=self.device, nfeatures=self.n_features, method=self.method)
 
     def _set_folder(self):
         root = get_project_root()
@@ -59,7 +63,8 @@ class Trainer:
         :param printProcess: If True, print the training process (loss and validation metrics after each epoch)
         :param plotCurves: If True, plot the training and validation curves at the end of the training process
         """
-        _, _, _, val_mse, PICP, MPIW = self.model.trainFold(Xtrain=self.X, Ytrain=self.Y, Xval=self.Xval, Yval=self.Yval,
+        _, _, _, val_mse, PICP, MPIW = self.model.trainFold(Xtrain=self.X, Ytrain=self.Y, Xval=self.Xval,
+                                                            Yval=self.Yval,
                                                             batch_size=batch_size, epochs=epochs, filepath=self.f,
                                                             printProcess=printProcess, alpha_=eta_,
                                                             yscale=[self.maxs, self.mins], plot_curves=plotCurves)
@@ -96,7 +101,8 @@ class Trainer:
 
         self.model.loadModel(self.f)  # Load model
         # Get outputs using trained model
-        yout = self.model.evaluateFoldUncertainty(valxn=Xeval, maxs=None, mins=None, batch_size=32, MC_samples=MC_samples)
+        yout = self.model.evaluateFoldUncertainty(valxn=Xeval, maxs=None, mins=None, batch_size=32,
+                                                  MC_samples=MC_samples)
         yout = np.array(yout)
         if self.method == 'DualAQD':
             yout[:, 0] = reverseMinMaxScale(yout[:, 0], self.maxs, self.mins)
@@ -147,12 +153,12 @@ class Trainer:
 
 
 if __name__ == '__main__':
-
     Xin, Yin, _, _ = create_synth_data(n=1000, plot=False)
     indices = np.arange(len(Yin))
     np.random.shuffle(indices)
     Xtrain, Ytrain = Xin[indices[:int(len(Yin) / 3)]], Yin[indices[:int(len(Yin) / 3)]]
-    xval, yval = Xin[indices[int(len(Yin) / 3):int(len(Yin) / 3 * 2)]], Yin[indices[int(len(Yin) / 3):int(len(Yin) / 3 * 2)]]
+    xval, yval = Xin[indices[int(len(Yin) / 3):int(len(Yin) / 3 * 2)]], Yin[
+        indices[int(len(Yin) / 3):int(len(Yin) / 3 * 2)]]
     xtest, ytest = Xin[indices[int(len(Yin) / 3 * 2):]], Yin[indices[int(len(Yin) / 3 * 2):]]
 
     trainer = Trainer(Xtrain, Ytrain, xval, yval)

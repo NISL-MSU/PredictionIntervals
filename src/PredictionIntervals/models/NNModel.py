@@ -384,8 +384,8 @@ class NNModel:
                     widths = np.zeros(indices.shape[0])
                     for w in range(indices.shape[0]):
                         y_neighbors = y_true[indices]
-                        UB_neighbors = y_utr[indices]
-                        LB_neighbors = y_ltr[indices]
+                        UB_neighbors = y_utr.cpu().numpy()[indices]
+                        LB_neighbors = y_ltr.cpu().numpy()[indices]
                         widths[w] = np.min(np.abs(y_neighbors - LB_neighbors)) + np.min(np.abs(UB_neighbors - y_neighbors))
 
                     # # Get a vector of all the PI widths in the training set

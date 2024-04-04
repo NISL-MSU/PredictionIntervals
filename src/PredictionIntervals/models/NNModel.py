@@ -55,7 +55,7 @@ def DualAQD_objective(y_pred, y_true, eta_, pe):
     else:  # During the first epochs, the lower and upper bounds are trained to match the output of the first NN
         # MPIW_p = - torch.mean(torch.abs(y_u - y_o) + torch.abs(y_o - y_l))  # Calculate MPIW_penalty
         # Loss_S = MPIW_p
-        MPIW_p = 1000 - (torch.mean((y_u - y_o)) + torch.mean((y_o - y_l)))  # Calculate MPIW_penalty
+        MPIW_p = torch.abs(100 - (torch.mean((y_u - y_o)) + torch.mean((y_o - y_l))))  # Calculate MPIW_penalty
         Loss_S = MPIW_p
 
     return Loss_S

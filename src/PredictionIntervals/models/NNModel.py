@@ -385,9 +385,9 @@ class NNModel:
                     # For each sample in the training set, find k-NN and calculate the minimum distance to upper and lower bounds
                     widths = np.zeros(indices_neighbors.shape[0])
                     for w in range(indices_neighbors.shape[0]):
-                        y_neighbors = y_true[indices_neighbors[w, :]]
-                        UB_neighbors = y_utr.cpu().numpy()[indices_neighbors[w, :]]
-                        LB_neighbors = y_ltr.cpu().numpy()[indices_neighbors[w, :]]
+                        y_neighbors = Ytrain_original[indices_neighbors[w, :]]
+                        UB_neighbors = ypredtr[:, 0][indices_neighbors[w, :]]
+                        LB_neighbors = ypredtr[:, 1][indices_neighbors[w, :]]
                         widths[w] = np.min(np.abs(y_neighbors - LB_neighbors)) + np.min(np.abs(UB_neighbors - y_neighbors))
 
                     # # Get a vector of all the PI widths in the training set

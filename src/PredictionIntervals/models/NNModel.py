@@ -249,7 +249,7 @@ class NNModel:
         warmup2 = 50  # Warmup period. Just helps to get rid of inconsistencies faster
         if not scratch:
             warmup, warmup2 = 0, 0
-        top = 0.95
+        top = 1
         alpha_0 = alpha_
         err_prev, err_new, beta_, beta_prev, d_err = 0, 0, 1, 0, 1
         early_stopping = EarlyStopping(min_delta=1e-5)
@@ -384,16 +384,16 @@ class NNModel:
                     MPIW.append(width)
                     PICP.append(picp)
 
-                    # For each sample in the training set, find k-NN and calculate the minimum distance to upper and lower bounds
-                    widths = np.zeros(indices_neighbors.shape[0])
-                    for w in range(indices_neighbors.shape[0]):
-                        y_neighbors = Ytrain_original[indices_neighbors[w, :]]
-                        UB_neighbors = ypredtr[:, 0][indices_neighbors[w, :]]
-                        LB_neighbors = ypredtr[:, 1][indices_neighbors[w, :]]
-                        widths[w] = np.min(np.abs(y_neighbors - LB_neighbors)) + np.min(np.abs(UB_neighbors - y_neighbors))
+                    # # For each sample in the training set, find k-NN and calculate the minimum distance to upper and lower bounds
+                    # widths = np.zeros(indices_neighbors.shape[0])
+                    # for w in range(indices_neighbors.shape[0]):
+                    #     y_neighbors = Ytrain_original[indices_neighbors[w, :]]
+                    #     UB_neighbors = ypredtr[:, 0][indices_neighbors[w, :]]
+                    #     LB_neighbors = ypredtr[:, 1][indices_neighbors[w, :]]
+                    #     widths[w] = np.min(np.abs(y_neighbors - LB_neighbors)) + np.min(np.abs(UB_neighbors - y_neighbors))
 
-                    # # Get a vector of all the PI widths in the training set
-                    # widths = (y_utr - y_ltr).cpu().numpy()
+                    # Get a vector of all the PI widths in the training set
+                    widths = (y_utr - y_ltr).cpu().numpy()
 
             ##################################################
             # Save model if there's improvement
@@ -428,9 +428,9 @@ class NNModel:
                     max_picptr = picptr
                     epoch_max_picptr = epoch
                 else:
-                    if epoch == epoch_max_picptr + 950 and \
-                            picptr <= max_picptr:  # If 950 epochs have passed without increasing PICP
-                        top = 1
+                    if epoch == epoch_max_picptr + 20 and \
+                            picptr <= max_picptr:  # If 500 epochs have passed without increasing PICP
+                        top = .95
                         # alpha_0 = alpha_0 * 2
 
                 if epoch > warmup2:

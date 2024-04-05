@@ -55,7 +55,7 @@ def DualAQD_objective(y_pred, y_true, eta_, pe):
     else:  # During the first epochs, the lower and upper bounds are trained to match the output of the first NN
         # MPIW_p = - torch.mean(torch.abs(y_u - y_o) + torch.abs(y_o - y_l))  # Calculate MPIW_penalty
         # Loss_S = MPIW_p
-        MPIW_p = torch.abs(50 - torch.mean((y_u - y_o))) + torch.abs(50 - torch.mean((y_o - y_l)))  # Calculate MPIW_penalty
+        MPIW_p = torch.abs(5 - torch.mean((y_u - y_o))) + torch.abs(5 - torch.mean((y_o - y_l)))  # Calculate MPIW_penalty
         Loss_S = MPIW_p
 
     return Loss_S
@@ -262,13 +262,13 @@ class NNModel:
             dir_basemodel = os.path.dirname(filepath)
             file_basename = os.path.basename(filepath).replace('DualAQD', 'MCDropout')
             filepath_base = os.path.join(dir_basemodel, file_basename)
-            # if os.path.exists(filepath_base):
-            #     self.basemodel.loadModel(filepath_base)
-            # else:
-            print("Training base model...")
-            self.basemodel.trainFold(Xtrain.copy(), Ytrain.copy(), Xval.copy(), Yval.copy(), batch_size, epochs,
-                                     filepath_base, False, yscale, alpha_, False)
-            print("Base model training complete!")
+            if os.path.exists(filepath_base):
+                self.basemodel.loadModel(filepath_base)
+            else:
+                print("Training base model...")
+                self.basemodel.trainFold(Xtrain.copy(), Ytrain.copy(), Xval.copy(), Yval.copy(), batch_size, epochs,
+                                         filepath_base, False, yscale, alpha_, False)
+                print("Base model training complete!")
             time.sleep(0.1)
 
             # Copy weights to initialize Hyper3DNetAQD model
@@ -284,7 +284,7 @@ class NNModel:
         for epoch in trange(epochs):  # Epoch loop
             # Batch sorting
             if epoch > warmup and (self.method in ['DualAQD', 'QD', 'QD+']):
-                indexes = np.argsort(widths)
+                indexes = np.argsort(widths)[::-1]
             else:
                 np.random.shuffle(indexes)
 

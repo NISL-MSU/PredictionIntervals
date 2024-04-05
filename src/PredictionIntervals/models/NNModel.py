@@ -262,13 +262,13 @@ class NNModel:
             dir_basemodel = os.path.dirname(filepath)
             file_basename = os.path.basename(filepath).replace('DualAQD', 'MCDropout')
             filepath_base = os.path.join(dir_basemodel, file_basename)
-            if os.path.exists(filepath_base):
-                self.basemodel.loadModel(filepath_base)
-            else:
-                print("Training base model...")
-                self.basemodel.trainFold(Xtrain.copy(), Ytrain.copy(), Xval.copy(), Yval.copy(), batch_size, epochs,
-                                         filepath_base, False, yscale, alpha_, False)
-                print("Base model training complete!")
+            # if os.path.exists(filepath_base):
+            #     self.basemodel.loadModel(filepath_base)
+            # else:
+            print("Training base model...")
+            self.basemodel.trainFold(Xtrain.copy(), Ytrain.copy(), Xval.copy(), Yval.copy(), batch_size, epochs,
+                                     filepath_base, False, yscale, alpha_, False)
+            print("Base model training complete!")
             time.sleep(0.1)
 
             # Copy weights to initialize Hyper3DNetAQD model

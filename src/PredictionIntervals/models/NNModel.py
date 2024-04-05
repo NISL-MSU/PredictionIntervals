@@ -249,7 +249,7 @@ class NNModel:
         warmup2 = 50  # Warmup period. Just helps to get rid of inconsistencies faster
         if not scratch:
             warmup, warmup2 = 0, 0
-        top = 1
+        top = 0.95
         alpha_0 = alpha_
         err_prev, err_new, beta_, beta_prev, d_err = 0, 0, 1, 0, 1
         early_stopping = EarlyStopping(min_delta=1e-5)
@@ -428,10 +428,10 @@ class NNModel:
                     max_picptr = picptr
                     epoch_max_picptr = epoch
                 else:
-                    if epoch == epoch_max_picptr + 20 and \
-                            picptr <= max_picptr:  # If 500 epochs have passed without increasing PICP
-                        top = .95
-                        alpha_0 = alpha_0 * 2
+                    if epoch == epoch_max_picptr + 950 and \
+                            picptr <= max_picptr:  # If 950 epochs have passed without increasing PICP
+                        top = 1
+                        # alpha_0 = alpha_0 * 2
 
                 if epoch > warmup2:
                     # Beta hyperparameter

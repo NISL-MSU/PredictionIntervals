@@ -47,8 +47,8 @@ def DualAQD_objective(y_pred, y_true, eta_, pe):
         MPIW_p = torch.mean(torch.abs(y_u - y_true) + torch.abs(y_true - y_l))  # Calculate MPIW_penalty
         cs = torch.max(torch.abs(y_o - y_true).detach())
         # DualAQD reported in the paper
-        Constraints = (torch.exp(torch.mean(-y_u + y_true) + cs) +
-                       torch.exp(torch.mean(-y_true + y_l) + cs))
+        Constraints = (torch.exp(torch.abs(torch.mean(-y_u + y_true) + cs)) +
+                       torch.exp(torch.clamp(torch.mean(-y_true + y_l) + cs, 0)))
 
         # Calculate loss
         Loss_S = MPIW_p + Constraints * eta_

@@ -206,6 +206,7 @@ class NNModel:
             self.output_size = 1
 
         criterion = nn.MSELoss()
+        self.architecture = architecture
         if architecture == 'shallow':
             network = NN(input_shape=self.nfeatures, output_size=self.output_size)
         elif architecture == 'deep':
@@ -263,7 +264,7 @@ class NNModel:
         # If the method is DualAQD, start training the base network
         ##############################################################
         if self.method == 'DualAQD':
-            self.basemodel = NNModel(self.device, self.nfeatures, 'MCDropout')
+            self.basemodel = NNModel(self.device, self.nfeatures, 'MCDropout', architecture=self.architecture)
             dir_basemodel = os.path.dirname(filepath)
             file_basename = os.path.basename(filepath).replace('DualAQD', 'MCDropout')
             filepath_base = os.path.join(dir_basemodel, file_basename)

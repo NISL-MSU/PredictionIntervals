@@ -592,7 +592,7 @@ class NNModel:
         self.model.network.load_state_dict(torch.load(path))
 
         if self.method in ['DualAQD']:
-            self.basemodel = NNModel(self.device, self.nfeatures, 'MCDropout')
+            self.basemodel = NNModel(self.device, self.nfeatures, 'MCDropout', self.architecture)
             filepathbase = path.replace('DualAQD', 'MCDropout')
             if 'TuningResults' in filepathbase:
                 filepathbase = filepathbase.replace('TuningResults', 'CVResults')

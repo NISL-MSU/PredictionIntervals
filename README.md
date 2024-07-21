@@ -40,7 +40,8 @@ First, create an instance of the class `Trainer`.
 *   `Xval`: Validation input data. 2-D numpy array, shape (#samples, #features)
 *   `Yval`: Validation target data. 1-D numpy array, shape (#samples, #features)
 *   `method`: PI-generation method. Options: 'DualAQD' or '[MCDropout](https://arxiv.org/pdf/1709.01907.pdf)'
-*   `normData`: If True, apply z-score normalization to the inputs and min-max normalization to the outputs
+*  `architecture`: Type of NN model to be used. Options: ['shallow' (Default, 2 hidden layers), 'deep' (3 hidden layers), 'deeper' (5 hidden layers)]  
+* `normData`: If True, apply z-score normalization to the inputs and min-max normalization to the outputs
 
 **Note**: Normalization is applied to the training set; then, the exact same scaling is applied to the validation set.
 

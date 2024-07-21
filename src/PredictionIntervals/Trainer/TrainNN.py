@@ -1,3 +1,5 @@
+import sys
+
 import torch
 import pickle
 from ..utils import *
@@ -6,7 +8,7 @@ from ..models.NNModel import NNModel
 
 class Trainer:
     def __init__(self, X: np.array, Y: np.array, Xval: np.array, Yval: np.array, method: str = 'DualAQD',
-                 normData: bool = True):
+                 architecture: str = 'shallow', normData: bool = True):
         """
         Train a PI-generation NN using DualAQD
         :param X: Input data (explainable variables). 2-D numpy array, shape (#samples, #features)
@@ -14,6 +16,8 @@ class Trainer:
         :param Xval: Validation input data. 2-D numpy array, shape (#samples, #features)
         :param Yval: Validation target data. 1-D numpy array, shape (#samples, #features)
         :param method: PI-generation method. Options: 'DualAQD' or 'MCDropout'
+        :param architecture: Type of NN model to be used. Options: ['shallow' (2 hidden layers),
+                             'deep' (3 hidden layers), 'deeper' (5 hidden layers)]
         :param normData: If True, apply z-score normalization to the inputs and min-max normalization to the outputs
         """
         # Class variables
@@ -25,6 +29,10 @@ class Trainer:
         self.name = 'temp_' + method  # Save the model in a temp folder
         # Configure model
         self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+        if architecture not in ['shallow', 'deep', 'deeper']:
+            sys.exit("For now, the only architecture options available are: ['shallow' (2 hidden layers), "
+                     "'deep' (3 hidden layers), 'deeper' (5 hidden layers)]")
+        self.architecture = architecture
         self.model = self.reset_model()
         self.f = self._set_folder()
 
@@ -34,7 +42,7 @@ class Trainer:
         self.set_data(X, Y, Xval, Yval)
 
     def reset_model(self):
-        return NNModel(device=self.device, nfeatures=self.n_features, method=self.method)
+        return NNModel(device=self.device, nfeatures=self.n_features, method=self.method, architecture=self.architecture)
 
     def set_data(self, X: np.array, Y: np.array, Xval: np.array, Yval: np.array):
         if self.normData:

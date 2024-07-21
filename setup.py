@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name='PredictionIntervals',
-    version='0.0.1',
+    version='0.1.0',
     author='Giorgio Morales - Montana State University',
     author_email='giorgiomoralesluna@gmail.com',
     description='DualAQD: Dual Accuracy-quality-driven Prediction Intervals',

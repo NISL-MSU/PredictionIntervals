@@ -190,7 +190,7 @@ class NNObject:
 
 class NNModel:
 
-    def __init__(self, device, nfeatures, method):
+    def __init__(self, device, nfeatures, method, architecture):
         self.method = method
         self.device = device
         self.nfeatures = nfeatures
@@ -206,7 +206,12 @@ class NNModel:
             self.output_size = 1
 
         criterion = nn.MSELoss()
-        network = NN(input_shape=self.nfeatures, output_size=self.output_size)
+        if architecture == 'shallow':
+            network = NN(input_shape=self.nfeatures, output_size=self.output_size)
+        elif architecture == 'deep':
+            network = NN2(input_shape=self.nfeatures, output_size=self.output_size)
+        else:
+            network = NN3(input_shape=self.nfeatures, output_size=self.output_size)
         network.to(self.device)
         # Training parameters
         optimizer = optim.Adadelta(network.parameters(), lr=0.1)

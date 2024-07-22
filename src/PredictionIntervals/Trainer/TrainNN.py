@@ -8,7 +8,7 @@ from ..models.NNModel import NNModel
 
 class Trainer:
     def __init__(self, X: np.array, Y: np.array, Xval: np.array, Yval: np.array, method: str = 'DualAQD',
-                 architecture: str = 'shallow', normData: bool = True):
+                 architecture: str = 'shallow', normData: bool = True, modelName: str = 'temp_weights'):
         """
         Train a PI-generation NN using DualAQD
         :param X: Input data (explainable variables). 2-D numpy array, shape (#samples, #features)
@@ -19,6 +19,7 @@ class Trainer:
         :param architecture: Type of NN model to be used. Options: ['shallow' (2 hidden layers),
                              'deep' (3 hidden layers), 'deeper' (5 hidden layers)]
         :param normData: If True, apply z-score normalization to the inputs and min-max normalization to the outputs
+        :param modelName: Name of the model
         """
         # Class variables
         self.method = method
@@ -33,12 +34,14 @@ class Trainer:
             sys.exit("For now, the only architecture options available are: ['shallow' (2 hidden layers), "
                      "'deep' (3 hidden layers), 'deeper' (5 hidden layers)]")
         self.architecture = architecture
+        self.modelName = modelName
         self.model = self.reset_model()
         self.f = self._set_folder()
 
         # Normalization
         self.normData = normData
         self.X, self.Xval, self.Y, self.Yval = None, None, None, None
+        self.means, self.stds, self.maxs, self.mins = None, None, None, None
         self.set_data(X, Y, Xval, Yval)
 
     def reset_model(self):
@@ -57,9 +60,9 @@ class Trainer:
 
     def _set_folder(self):
         root = get_project_root()
-        folder = os.path.join(root, "PredictionIntervals//models//temp_weights")
-        if not os.path.exists(os.path.join(root, "PredictionIntervals//models//temp_weights")):
-            os.mkdir(os.path.join(root, "PredictionIntervals//models//temp_weights"))
+        folder = os.path.join(root, "PredictionIntervals//models//" + self.modelName)
+        if not os.path.exists(os.path.join(root, "PredictionIntervals//models//" + self.modelName)):
+            os.mkdir(os.path.join(root, "PredictionIntervals//models//" + self.modelName))
         if not os.path.exists(folder):
             os.mkdir(folder)
         return folder + "//weights-NN-" + self.name

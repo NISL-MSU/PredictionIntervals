@@ -58,6 +58,10 @@ class Trainer:
             self.Y, self.maxs, self.mins = Y, None, None
             self.Xval, self.Yval = Xval, Yval
 
+    def set_modelName(self, modelName):
+        self.modelName = modelName
+        self._set_folder()
+
     def _set_folder(self):
         root = get_project_root()
         folder = os.path.join(root, "PredictionIntervals//models//" + self.modelName)

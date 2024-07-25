@@ -272,8 +272,8 @@ class NNModel:
             #     self.basemodel.loadModel(filepath_base)
             # else:
             print("Training base model...")
-            self.basemodel.trainFold(Xtrain.copy(), Ytrain.copy(), Xval.copy(), Yval.copy(), batch_size, int(epochs/2),
-                                     filepath_base, False, yscale, alpha_, False)
+            self.basemodel.trainFold(Xtrain.copy(), Ytrain.copy(), Xval.copy(), Yval.copy(), int(batch_size*2),
+                                     int(epochs/2), filepath_base, False, yscale, alpha_, False)
             print("Base model training complete!")
             time.sleep(0.1)
 

@@ -64,9 +64,9 @@ class Trainer:
 
     def _set_folder(self):
         root = get_project_root()
-        folder = os.path.join(root, "PredictionIntervals//models//" + self.modelName)
-        if not os.path.exists(os.path.join(root, "PredictionIntervals//models//" + self.modelName)):
-            os.mkdir(os.path.join(root, "PredictionIntervals//models//" + self.modelName))
+        folder = os.path.join(root, "PredictionIntervals//models//saved_models//" + self.modelName)
+        if not os.path.exists(os.path.join(root, "PredictionIntervals//models//saved_models//" + self.modelName)):
+            os.mkdir(os.path.join(root, "PredictionIntervals//models//saved_models//" + self.modelName))
         if not os.path.exists(folder):
             os.mkdir(folder)
         return folder + "//weights-NN-" + self.name

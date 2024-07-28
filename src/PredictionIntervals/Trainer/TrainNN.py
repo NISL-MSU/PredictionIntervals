@@ -60,7 +60,7 @@ class Trainer:
 
     def set_modelName(self, modelName):
         self.modelName = modelName
-        self._set_folder()
+        self.f = self._set_folder()
 
     def _set_folder(self):
         root = get_project_root()

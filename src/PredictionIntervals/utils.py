@@ -87,7 +87,7 @@ def create_synth_data(n=1000, plot=False, extrapolation=False, figsize=(4, 3)):
     if not extrapolation:
         X = np.linspace(-5, 5, num=n)
     else:
-        X = np.linspace(-7.5, 7.5, num=n)
+        X = np.linspace(-7, 7, num=n)
     randn = np.random.normal(size=n)
     gauss = (2 + 2 * np.cos(1.2 * X))
     noise = gauss * randn
@@ -100,6 +100,6 @@ def create_synth_data(n=1000, plot=False, extrapolation=False, figsize=(4, 3)):
         plt.fill_between(X, P1, P2, color='gray', alpha=0.5, linewidth=0, label='Ideal 95% PIs')
         plt.scatter(X, Y, label='Data with noise')
         plt.plot(X, orig, 'r', label='True signal')
-        plt.xlim([-7.5, 7.5])
+        plt.xlim([-7, 7])
         plt.legend()
     return X, Y, P1, P2

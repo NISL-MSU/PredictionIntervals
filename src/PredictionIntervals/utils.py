@@ -81,7 +81,7 @@ def reverseMinMaxScale(testx, maxs, mins):
     return testxn
 
 
-def create_synth_data(n=1000, plot=False, extrapolation=False):
+def create_synth_data(n=1000, plot=False, extrapolation=False, figsize=(4, 3)):
     """Create a synthetic sinusoidal dataset with varying PI width"""
     np.random.seed(7)
     if not extrapolation:
@@ -96,11 +96,10 @@ def create_synth_data(n=1000, plot=False, extrapolation=False):
     P1 = orig + 1.96 * gauss
     P2 = orig - 1.96 * gauss
     if plot:
-        plt.figure(figsize=(4, 3))  # (9.97, 7.66)
+        plt.figure(figsize=figsize)  # (9.97, 7.66)
         plt.fill_between(X, P1, P2, color='gray', alpha=0.5, linewidth=0, label='Ideal 95% PIs')
         plt.scatter(X, Y, label='Data with noise')
         plt.plot(X, orig, 'r', label='True signal')
+        plt.xlim([-7.5, 7.5])
         plt.legend()
     return X, Y, P1, P2
-
-create_synth_data()

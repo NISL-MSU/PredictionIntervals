@@ -244,9 +244,9 @@ class NNModel:
         _, indices_neighbors = nbrs.kneighbors(Xtrain)
 
         # Variables initialization
-        val_mse = np.infty
+        val_mse = np.inf
         val_picp = 0
-        val_mpiw = np.infty
+        val_mpiw = np.inf
         MPIWtr, PICPtr, MSEtr, MPIW, PICP, MSE, BETA = [], [], [], [], [], [], []
         widths = [0]
         picp, picptr, max_picptr, epoch_max_picptr = 0, 0, 0, 0
